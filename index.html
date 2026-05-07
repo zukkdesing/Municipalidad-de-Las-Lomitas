@@ -208,16 +208,36 @@
     box-shadow:0 0 60px rgba(0,0,0,.45);
     z-index:5;
     will-change:width,height,border-radius;
+    background:#000;
   }
-  .sh-media-wrap img {
+
+  /* Video cover inside expanding media */
+  .sh-video-wrap {
+    position:relative;
     width:100%; height:100%;
-    object-fit:cover; display:block;
-    pointer-events:none; user-select:none;
+    overflow:hidden;
   }
+  .sh-video-wrap iframe {
+    position:absolute;
+    top:50%; left:50%;
+    /* Cover trick: large enough to fill any container aspect during expansion */
+    width:max(100%, 180vh);
+    height:max(100%, 57vw);
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+    border:none;
+  }
+  /* Transparent click-blocker so scroll events pass through */
+  .sh-video-block {
+    position:absolute; inset:0;
+    z-index:1; pointer-events:none;
+  }
+
   .sh-dark {
     position:absolute; inset:0;
-    background:rgba(0,0,0,.42);
+    background:rgba(0,0,0,.32);
     will-change:opacity;
+    z-index:2;
   }
 
   /* Split title words */
@@ -778,11 +798,16 @@
     style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vista-aerea-3-banos.jpg')">
   </div>
 
-  <!-- Expanding center image -->
+  <!-- Expanding center video (YouTube, autoplay muted loop) -->
   <div class="sh-media-wrap" id="sh-media-wrap">
-    <img
-      src="https://conocedores.com/wp-content/uploads/2023/08/viajando-en-el-tiempo-la-experiencia-de-visitar-el-banado-la-estrella-en-argentina-19082023-7.webp"
-      alt="Bañado La Estrella">
+    <div class="sh-video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/rDH2YF8q13s?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&disablekb=1&modestbranding=1&playsinline=1&playlist=rDH2YF8q13s"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      <div class="sh-video-block"></div>
+    </div>
     <div class="sh-dark" id="sh-dark"></div>
   </div>
 
@@ -1493,8 +1518,8 @@
     /* Background fade */
     bg.style.opacity = String(Math.max(0, 1 - progress));
 
-    /* Dark overlay on media */
-    dark.style.opacity = String(Math.max(0, 0.42 - progress * 0.35));
+    /* Dark overlay on video — start lighter so video is visible, fade on expansion */
+    dark.style.opacity = String(Math.max(0, 0.32 - progress * 0.28));
 
     /* Words split apart */
     w1.style.transform = 'translateX(-' + tx + 'vw)';
