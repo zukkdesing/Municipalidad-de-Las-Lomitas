@@ -7,7 +7,6 @@
   <meta name="description" content="Sitio oficial de la Municipalidad de Las Lomitas, Departamento Patiño, Formosa. Intendente Pablo Basualdo.">
   <meta name="theme-color" content="#0066CC">
 
-  <!-- Google Fonts: Nunito Sans + Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
@@ -15,7 +14,7 @@
 
   <style>
   /* =====================================================
-     DESIGN TOKENS — Buenos Aires institutional style
+     DESIGN TOKENS
   ===================================================== */
   :root {
     --azul:       #0066CC;
@@ -80,7 +79,6 @@
   .section-desc { margin-top:.75rem; color:var(--gris-m); font-size:1.02rem; line-height:1.75; max-width:560px; }
   .section-desc.centered { margin:0 auto; text-align:center; }
 
-  /* Tags */
   .tag {
     display:inline-block; padding:.18rem .7rem; border-radius:50px;
     font-size:.68rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
@@ -90,7 +88,6 @@
   .tag-ocre   { background:var(--ocre-claro); color:#92400E; }
   .tag-gris   { background:var(--gris-f); color:var(--gris-osc); }
 
-  /* Buttons */
   .btn {
     display:inline-flex; align-items:center; gap:.5rem;
     padding:.75rem 1.6rem; border-radius:8px; border:none;
@@ -109,7 +106,6 @@
   .btn-sm { padding:.5rem 1.1rem; font-size:.82rem; }
   .btn-lg { padding:1rem 2.2rem; font-size:1rem; border-radius:10px; }
 
-  /* Divider accent */
   .accent-line {
     width:3.5rem; height:3px; background:var(--azul);
     border-radius:2px; margin-top:.85rem;
@@ -132,7 +128,6 @@
   }
   .hd-wrap { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
 
-  /* Logo */
   .logo { display:flex; align-items:center; gap:.8rem; flex-shrink:0; }
   .logo-mark {
     width:42px; height:42px; border-radius:8px;
@@ -144,7 +139,6 @@
   .logo-name { font-size:1.02rem; font-weight:800; color:var(--negro); }
   .logo-sub  { font-size:.6rem; color:var(--gris-m); }
 
-  /* Main nav */
   .main-nav ul { display:flex; align-items:center; gap:.08rem; }
   .main-nav a {
     display:block; padding:.45rem .72rem; font-size:.82rem; font-weight:700;
@@ -153,7 +147,6 @@
   .main-nav a:hover { color:var(--azul); background:var(--azul-claro); }
   .main-nav .active { color:var(--azul); }
 
-  /* Header CTA */
   .hd-cta { display:flex; align-items:center; gap:.65rem; flex-shrink:0; }
   .btn-ciudadano {
     display:flex; align-items:center; gap:.4rem;
@@ -164,14 +157,12 @@
   }
   .btn-ciudadano:hover { background:var(--azul-osc); }
 
-  /* Hamburger */
   .hbg { display:none; background:none; border:none; cursor:pointer; padding:4px; flex-direction:column; gap:4px; }
   .hbg span { display:block; width:24px; height:2px; background:var(--negro); border-radius:2px; transition:all .3s; }
   .hbg.on span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
   .hbg.on span:nth-child(2) { opacity:0; }
   .hbg.on span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
 
-  /* Mobile nav */
   .mob-nav {
     display:none; position:fixed; top:0; inset:0;
     background:#fff; z-index:999; padding:5rem 1.5rem 2rem;
@@ -185,30 +176,114 @@
   .mob-nav a:hover { color:var(--azul); }
 
   /* =====================================================
-     HERO — WebGL Shader
+     SCROLL EXPANSION HERO
+     Port of scroll-expansion-hero.tsx (React → Vanilla JS)
   ===================================================== */
-  #inicio {
-    position:relative; min-height:100vh; min-height:100svh;
-    display:flex; align-items:center; overflow:hidden; background:#060F18;
+  .sh-section {
+    position:relative;
+    height:100vh; height:100svh;
+    overflow:hidden;
+    background:#040D14;
   }
-  #hero-canvas {
-    position:absolute; inset:0; width:100%; height:100%; touch-action:none;
+
+  /* Background image — fades out on scroll */
+  .sh-bg {
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+    will-change:opacity;
   }
-  .hero-overlay {
+  .sh-bg::after {
+    content:'';
+    position:absolute; inset:0;
+    background:rgba(0,0,0,.12);
+  }
+
+  /* Center expanding media */
+  .sh-media-wrap {
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    overflow:hidden;
+    border-radius:16px;
+    box-shadow:0 0 60px rgba(0,0,0,.45);
+    z-index:5;
+    will-change:width,height,border-radius;
+  }
+  .sh-media-wrap img {
+    width:100%; height:100%;
+    object-fit:cover; display:block;
+    pointer-events:none; user-select:none;
+  }
+  .sh-dark {
+    position:absolute; inset:0;
+    background:rgba(0,0,0,.42);
+    will-change:opacity;
+  }
+
+  /* Split title words */
+  .sh-texts {
+    position:absolute; inset:0;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    z-index:10; pointer-events:none; gap:.4rem;
+  }
+  .sh-word {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.8rem,7vw,5.5rem);
+    font-weight:900;
+    color:rgba(255,255,255,.9);
+    text-shadow:0 2px 28px rgba(0,0,0,.6);
+    will-change:transform,opacity;
+    white-space:nowrap;
+  }
+
+  /* Scroll hint */
+  .sh-hint {
+    position:absolute;
+    bottom:2.2rem; left:50%;
+    transform:translateX(-50%);
+    z-index:10;
+    color:rgba(255,255,255,.55);
+    font-size:.72rem; font-weight:700;
+    letter-spacing:.12em; text-transform:uppercase;
+    text-align:center; pointer-events:none;
+    will-change:opacity;
+  }
+  .sh-hint i {
+    display:block; margin-top:.5rem;
+    animation:bounce 2.4s ease-in-out infinite;
+  }
+
+  /* After-expansion overlay content */
+  .sh-after {
+    position:absolute; inset:0;
+    z-index:20;
+    opacity:0; pointer-events:none;
+    transition:opacity .65s ease;
+  }
+  .sh-after.visible {
+    opacity:1; pointer-events:auto;
+  }
+  .sh-after-overlay {
     position:absolute; inset:0;
     background:linear-gradient(135deg,
-      rgba(0,20,50,.78) 0%,
-      rgba(0,40,90,.55) 45%,
-      rgba(0,60,30,.35) 80%,
-      rgba(0,10,30,.6) 100%
+      rgba(0,20,50,.82) 0%,
+      rgba(0,40,90,.55) 40%,
+      rgba(0,70,35,.28) 75%,
+      rgba(0,10,30,.62) 100%
     );
   }
-  .hero-body {
+  .sh-after-body {
     position:relative; z-index:2;
-    max-width:1280px; margin:0 auto; padding:9rem 1.5rem 5rem;
-    display:grid; grid-template-columns:1.05fr .95fr; gap:4rem; align-items:center; width:100%;
+    max-width:1280px; margin:0 auto;
+    padding:9rem 1.5rem 4rem;
+    height:100%;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:4rem; align-items:center;
   }
-  .hero-left { animation:fadeUp .8s ease-out both; }
+
+  /* Hero left (inside sh-after) */
   .hero-eyebrow {
     display:inline-flex; align-items:center; gap:.5rem;
     background:rgba(255,255,255,.1); backdrop-filter:blur(8px);
@@ -219,15 +294,14 @@
   }
   .hero-h1 {
     font-family:'Playfair Display',serif;
-    font-size:clamp(2.6rem,5.5vw,4.8rem);
-    line-height:1.05; color:#fff; margin-bottom:1.1rem; font-weight:900;
+    font-size:clamp(2.5rem,5vw,4.4rem);
+    line-height:1.06; color:#fff; margin-bottom:1.1rem; font-weight:900;
   }
   .hero-h1 em { color:#67E8F9; font-style:italic; }
-  .hero-sub { font-size:1.07rem; line-height:1.8; color:rgba(255,255,255,.78); margin-bottom:2.2rem; max-width:480px; }
+  .hero-sub { font-size:1.05rem; line-height:1.8; color:rgba(255,255,255,.75); margin-bottom:2.2rem; max-width:480px; }
   .hero-btns { display:flex; flex-wrap:wrap; gap:.85rem; }
 
-  /* Hero right: glass cards */
-  .hero-right { animation:fadeUp .8s .18s ease-out both; }
+  /* Hero right: glass stat cards */
   .hero-cards { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
   .hero-card {
     background:rgba(255,255,255,.08); backdrop-filter:blur(14px);
@@ -239,7 +313,7 @@
   .hero-card-num { font-family:'Playfair Display',serif; font-size:2.1rem; color:#67E8F9; font-weight:700; line-height:1; }
   .hero-card-lbl { font-size:.77rem; color:rgba(255,255,255,.65); margin-top:.3rem; font-weight:600; }
 
-  /* Scroll indicator */
+  /* Scroll indicator (inside sh-after) */
   .scroll-ind {
     position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
     z-index:3; display:flex; flex-direction:column; align-items:center; gap:.4rem;
@@ -301,9 +375,7 @@
     transition:all .3s var(--ease); background:#fff;
   }
   .proy-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-l); border-color:transparent; }
-  .proy-img {
-    height:200px; position:relative; overflow:hidden;
-  }
+  .proy-img { height:210px; position:relative; overflow:hidden; }
   .proy-img-bg {
     position:absolute; inset:0; background-size:cover; background-position:center;
     transition:transform .5s ease;
@@ -337,7 +409,7 @@
     border:1.5px solid var(--gris-l); transition:all .3s var(--ease); cursor:pointer;
   }
   .card-not:hover { transform:translateY(-4px); box-shadow:var(--shadow-l); border-color:transparent; }
-  .card-img { height:200px; position:relative; overflow:hidden; }
+  .card-img { height:210px; position:relative; overflow:hidden; }
   .card-img-bg {
     position:absolute; inset:0; background-size:cover; background-position:center;
     transition:transform .4s ease;
@@ -376,9 +448,8 @@
   .evt-info h4 { font-size:.95rem; font-weight:800; color:var(--negro); margin-bottom:.2rem; }
   .evt-info p  { font-size:.8rem; color:var(--gris-m); }
 
-  /* Turismo highlight in eventos section */
   .turismo-highlight {
-    position:relative; border-radius:var(--r-lg); overflow:hidden; min-height:380px;
+    position:relative; border-radius:var(--r-lg); overflow:hidden; min-height:400px;
     display:flex; align-items:flex-end;
   }
   .th-bg { position:absolute; inset:0; background-size:cover; background-position:center; }
@@ -389,36 +460,55 @@
   .th-body p  { font-size:.88rem; color:rgba(255,255,255,.8); line-height:1.65; margin-bottom:1rem; }
 
   /* =====================================================
-     MEDIA CENTER
+     MEDIA CENTER — 8 fotos
   ===================================================== */
   #media { background:var(--negro); padding:5rem 0; }
   .media-header { text-align:center; margin-bottom:2.5rem; }
   .media-header .section-title { color:#fff; }
   .media-header .section-desc  { color:rgba(255,255,255,.6); margin:0 auto; }
+
   .media-grid {
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    grid-template-rows:200px 200px;
+    grid-template-rows:210px 210px 210px;
     gap:.8rem;
   }
+  /* Large hero item: 2 cols × 2 rows */
+  .media-item:nth-child(1) { grid-column:1/3; grid-row:1/3; }
+  /* Top-right: 2 items 1×1 */
+  .media-item:nth-child(2) { grid-column:3; grid-row:1; }
+  .media-item:nth-child(3) { grid-column:4; grid-row:1; }
+  /* Mid-right: 2 items 1×1 */
+  .media-item:nth-child(4) { grid-column:3; grid-row:2; }
+  .media-item:nth-child(5) { grid-column:4; grid-row:2; }
+  /* Bottom row: wide + 2 small */
+  .media-item:nth-child(6) { grid-column:1/3; grid-row:3; }
+  .media-item:nth-child(7) { grid-column:3;   grid-row:3; }
+  .media-item:nth-child(8) { grid-column:4;   grid-row:3; }
+
   .media-item {
     position:relative; overflow:hidden; border-radius:var(--r); cursor:pointer;
     transition:transform .3s;
   }
-  .media-item:hover { transform:scale(1.02); }
-  .media-item:first-child  { grid-column:span 2; grid-row:span 2; }
-  .media-item:nth-child(4) { grid-column:span 2; }
+  .media-item:hover { transform:scale(1.02); z-index:2; }
   .media-img {
     position:absolute; inset:0; background-size:cover; background-position:center;
     transition:transform .5s ease;
   }
-  .media-item:hover .media-img { transform:scale(1.06); }
+  .media-item:hover .media-img { transform:scale(1.07); }
   .media-overlay {
     position:absolute; inset:0;
-    background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 50%);
+    background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);
     opacity:0; transition:opacity .3s;
   }
   .media-item:hover .media-overlay { opacity:1; }
+  .media-caption {
+    position:absolute; bottom:0; left:0; right:0;
+    padding:.6rem .9rem;
+    color:#fff; font-size:.75rem; font-weight:700;
+    opacity:0; transition:opacity .3s; z-index:2;
+  }
+  .media-item:hover .media-caption { opacity:1; }
   .media-ico {
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     color:#fff; font-size:1.5rem; opacity:0; transition:opacity .3s;
@@ -430,9 +520,7 @@
   ===================================================== */
   #gobierno { background:var(--gris-f); }
   .gob-layout { display:grid; grid-template-columns:340px 1fr; gap:5rem; align-items:center; }
-  .gob-foto-wrap {
-    position:relative;
-  }
+  .gob-foto-wrap { position:relative; }
   .gob-foto {
     width:100%; aspect-ratio:3/4; border-radius:var(--r-lg);
     overflow:hidden; box-shadow:var(--shadow-l);
@@ -487,11 +575,10 @@
   .transp-btns { display:flex; gap:.75rem; flex-wrap:wrap; }
 
   /* =====================================================
-     CONTACTO RÁPIDO
+     CONTACTO
   ===================================================== */
   #contacto { background:#fff; }
   .con-layout { display:grid; grid-template-columns:1fr 1.1fr; gap:5rem; align-items:start; }
-
   .con-info .section-title { margin-bottom:1.1rem; }
   .con-dato { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1.1rem; }
   .con-ico {
@@ -512,7 +599,6 @@
   }
   .red:hover { background:var(--azul); color:#fff; transform:translateY(-2px); }
 
-  /* Form */
   .form-card { background:var(--gris-f); border-radius:var(--r-lg); padding:2.25rem; border:1.5px solid var(--gris-l); }
   .form-card h3 { font-size:1.2rem; font-weight:800; color:var(--negro); margin-bottom:1.5rem; }
   .fg { margin-bottom:1rem; }
@@ -579,6 +665,10 @@
      RESPONSIVE
   ===================================================== */
   @media(max-width:1100px){
+    .sh-after-body { grid-template-columns:1fr; text-align:center; }
+    .hero-sub { max-width:100%; }
+    .hero-btns { justify-content:center; }
+    .hero-cards { grid-template-columns:repeat(4,1fr); }
     .srv-grid  { grid-template-columns:repeat(2,1fr); }
     .proy-grid { grid-template-columns:repeat(2,1fr); }
     .not-grid  { grid-template-columns:repeat(2,1fr); }
@@ -586,13 +676,18 @@
     .gob-foto-wrap { max-width:320px; }
     .ft-top { grid-template-columns:1fr 1fr; }
     .evt-layout { grid-template-columns:1fr; }
-    .hero-body { grid-template-columns:1fr; text-align:center; }
-    .hero-sub { max-width:100%; }
-    .hero-btns { justify-content:center; }
-    .hero-cards { grid-template-columns:repeat(4,1fr); }
-    .media-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(3,180px); }
-    .media-item:first-child { grid-column:span 1; grid-row:span 1; }
-    .media-item:nth-child(4) { grid-column:span 1; }
+    .media-grid {
+      grid-template-columns:repeat(2,1fr);
+      grid-template-rows:repeat(5,170px);
+    }
+    .media-item:nth-child(1) { grid-column:1/3; grid-row:1; }
+    .media-item:nth-child(2) { grid-column:1; grid-row:2; }
+    .media-item:nth-child(3) { grid-column:2; grid-row:2; }
+    .media-item:nth-child(4) { grid-column:1; grid-row:3; }
+    .media-item:nth-child(5) { grid-column:2; grid-row:3; }
+    .media-item:nth-child(6) { grid-column:1/3; grid-row:4; }
+    .media-item:nth-child(7) { grid-column:1; grid-row:5; }
+    .media-item:nth-child(8) { grid-column:2; grid-row:5; }
   }
   @media(max-width:768px){
     .main-nav,.hd-cta { display:none; }
@@ -606,8 +701,11 @@
     .con-layout { grid-template-columns:1fr; }
     .ft-top { grid-template-columns:1fr; gap:2rem; }
     .form-row { grid-template-columns:1fr; }
-    .hero-body { padding-top:7rem; }
-    .media-grid { grid-template-columns:1fr 1fr; grid-template-rows:repeat(3,150px); }
+    .sh-after-body { padding-top:7rem; }
+    .media-grid {
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:repeat(5,150px);
+    }
     .transp-inner { flex-direction:column; align-items:flex-start; }
   }
   @media(max-width:540px){
@@ -660,71 +758,107 @@
 
 <!-- Mobile nav -->
 <nav class="mob-nav" id="mob-nav">
-  <a href="#inicio"       onclick="cm()">Inicio</a>
-  <a href="#gobierno"     onclick="cm()">Municipalidad</a>
+  <a href="#inicio"         onclick="cm()">Inicio</a>
+  <a href="#gobierno"       onclick="cm()">Municipalidad</a>
   <a href="#servicios-dest" onclick="cm()">Servicios</a>
-  <a href="#proyectos"    onclick="cm()">Proyectos</a>
-  <a href="#eventos"      onclick="cm()">Participación</a>
-  <a href="#noticias"     onclick="cm()">Noticias</a>
-  <a href="#contacto"     onclick="cm()">Contacto</a>
+  <a href="#proyectos"      onclick="cm()">Proyectos</a>
+  <a href="#eventos"        onclick="cm()">Participación</a>
+  <a href="#noticias"       onclick="cm()">Noticias</a>
+  <a href="#contacto"       onclick="cm()">Contacto</a>
 </nav>
 
 <!-- =====================================================
-     HERO — WebGL Animated Shader (ported from React)
+     HERO — Scroll Expansion
+     Port of scroll-expansion-hero.tsx → Vanilla JS
 ===================================================== -->
-<section id="inicio">
-  <canvas id="hero-canvas"></canvas>
-  <div class="hero-overlay"></div>
+<section id="inicio" class="sh-section">
 
-  <div class="hero-body">
-    <div class="hero-left">
-      <div class="hero-eyebrow">
-        <i class="fa-solid fa-droplet" style="color:#67E8F9"></i>
-        Capital Nacional del Horno &middot; Bañado La Estrella
-      </div>
-      <h1 class="hero-h1">
-        Donde el agua<br><em>nombra</em> la tierra
-      </h1>
-      <p class="hero-sub">
-        Las Lomitas guarda en su corazón uno de los humedales más extraordinarios de América. Un lugar donde la naturaleza no es paisaje de fondo, sino protagonista.
-      </p>
-      <div class="hero-btns">
-        <a href="#servicios-dest" class="btn btn-white btn-lg"><i class="fa-solid fa-bolt"></i> Servicios Online</a>
-        <a href="#turismo-link"   class="btn btn-ghost btn-lg"><i class="fa-solid fa-compass"></i> Conocé Las Lomitas</a>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="hero-cards">
-        <div class="hero-card">
-          <div class="hero-card-ico">🏛️</div>
-          <div class="hero-card-num">1914</div>
-          <div class="hero-card-lbl">Año de fundación</div>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-ico">👥</div>
-          <div class="hero-card-num">12.4k</div>
-          <div class="hero-card-lbl">Habitantes</div>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-ico">🌡️</div>
-          <div class="hero-card-num">48°C</div>
-          <div class="hero-card-lbl">Temperatura récord</div>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-ico">💧</div>
-          <div class="hero-card-num">7ª</div>
-          <div class="hero-card-lbl">Maravilla Natural Argentina</div>
-        </div>
-      </div>
-    </div>
+  <!-- Background image (fades as you scroll) -->
+  <div class="sh-bg" id="sh-bg"
+    style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vista-aerea-3-banos.jpg')">
   </div>
 
-  <div class="scroll-ind">Explorá <i class="fa-solid fa-chevron-down"></i></div>
+  <!-- Expanding center image -->
+  <div class="sh-media-wrap" id="sh-media-wrap">
+    <img
+      src="https://conocedores.com/wp-content/uploads/2023/08/viajando-en-el-tiempo-la-experiencia-de-visitar-el-banado-la-estrella-en-argentina-19082023-7.webp"
+      alt="Bañado La Estrella">
+    <div class="sh-dark" id="sh-dark"></div>
+  </div>
+
+  <!-- Split title words (spread apart on scroll) -->
+  <div class="sh-texts">
+    <div class="sh-word" id="sh-w1">Bañado</div>
+    <div class="sh-word" id="sh-w2">La&nbsp;Estrella</div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="sh-hint" id="sh-hint">
+    Desplazate para explorar
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+
+  <!-- Content that appears after full expansion -->
+  <div class="sh-after" id="sh-after">
+    <div class="sh-after-overlay"></div>
+
+    <div class="sh-after-body">
+      <!-- Left -->
+      <div>
+        <div class="hero-eyebrow">
+          <i class="fa-solid fa-droplet" style="color:#67E8F9"></i>
+          Bañado La Estrella &middot; Formosa, Argentina
+        </div>
+        <h1 class="hero-h1">
+          Donde el agua<br><em>nombra</em> la tierra
+        </h1>
+        <p class="hero-sub">
+          Las Lomitas guarda en su corazón uno de los humedales más extraordinarios de América del Sur. Un lugar donde la naturaleza no es paisaje de fondo, sino protagonista.
+        </p>
+        <div class="hero-btns">
+          <a href="#servicios-dest" class="btn btn-white btn-lg">
+            <i class="fa-solid fa-bolt"></i> Servicios Online
+          </a>
+          <a href="#turismo-link" class="btn btn-ghost btn-lg">
+            <i class="fa-solid fa-compass"></i> Conocé Las Lomitas
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: stat cards -->
+      <div>
+        <div class="hero-cards">
+          <div class="hero-card">
+            <div class="hero-card-ico">🏛️</div>
+            <div class="hero-card-num">1914</div>
+            <div class="hero-card-lbl">Año de fundación</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-ico">👥</div>
+            <div class="hero-card-num">21.988</div>
+            <div class="hero-card-lbl">Habitantes</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-ico">🌡️</div>
+            <div class="hero-card-num">48°C</div>
+            <div class="hero-card-lbl">Temperatura récord</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-ico">💧</div>
+            <div class="hero-card-num">7ª</div>
+            <div class="hero-card-lbl">Maravilla Natural Argentina</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-ind">Explorá <i class="fa-solid fa-chevron-down"></i></div>
+  </div>
+
 </section>
 
 <!-- =====================================================
-     ACCESOS RÁPIDOS (barra azul)
+     ACCESOS RÁPIDOS
 ===================================================== -->
 <section id="servicios">
   <div class="container">
@@ -769,35 +903,30 @@
       <p class="section-desc">Todos los servicios municipales en un solo lugar. Rápido, simple y accesible para todos los vecinos y vecinas.</p>
     </div>
     <div class="srv-grid">
-
       <div class="srv-card reveal">
         <div class="srv-ico-wrap" style="background:#EBF3FF;color:#0066CC;"><i class="fa-solid fa-file-invoice-dollar"></i></div>
         <div class="srv-title">Impuestos y Tasas Municipales</div>
         <div class="srv-desc">Consultá y pagá tu tasa de alumbrado, barrido y limpieza. Verificá el estado de tu cuenta corriente municipal.</div>
         <div class="srv-arrow"><i class="fa-solid fa-arrow-right"></i> Ver servicio</div>
       </div>
-
       <div class="srv-card reveal d1">
         <div class="srv-ico-wrap" style="background:#EBF7F2;color:#2D8659;"><i class="fa-solid fa-id-card"></i></div>
         <div class="srv-title">Documentos y Habilitaciones</div>
         <div class="srv-desc">Trámites de habilitación comercial, certificados de buena conducta y documentación oficial municipal.</div>
         <div class="srv-arrow"><i class="fa-solid fa-arrow-right"></i> Ver servicio</div>
       </div>
-
       <div class="srv-card reveal d2">
         <div class="srv-ico-wrap" style="background:#FBF4EC;color:#D4A574;"><i class="fa-solid fa-hard-hat"></i></div>
         <div class="srv-title">Obras Públicas y Permisos</div>
         <div class="srv-desc">Gestioná permisos de construcción, conexiones de servicios y solicitudes de obras de infraestructura.</div>
         <div class="srv-arrow"><i class="fa-solid fa-arrow-right"></i> Ver servicio</div>
       </div>
-
       <div class="srv-card reveal d3">
         <div class="srv-ico-wrap" style="background:#FEF2F2;color:#DC2626;"><i class="fa-solid fa-headset"></i></div>
         <div class="srv-title">Reclamos y Denuncias</div>
         <div class="srv-desc">Reportá inconvenientes en espacios públicos, baches, luminarias o problemas en tu barrio. Tu voz importa.</div>
         <div class="srv-arrow"><i class="fa-solid fa-arrow-right"></i> Ver servicio</div>
       </div>
-
     </div>
   </div>
 </section>
@@ -809,23 +938,23 @@
   <div class="container">
     <div class="section-header reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;">
       <div>
-        <span class="section-kicker">Gestión Basualdo 2023–2027</span>
-        <h2 class="section-title">Proyectos <span>Estratégicos</span></h2>
+        <span class="section-kicker">Gestión Basualdo 2025 – Actualidad</span>
+        <h2 class="section-title">Obras en <span>Marcha</span></h2>
         <div class="accent-line"></div>
       </div>
-      <a href="#" class="btn btn-outline">Ver todos los proyectos <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#" class="btn btn-outline">Ver todas las obras <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="proy-grid">
 
       <div class="proy-card reveal">
         <div class="proy-img">
-          <div class="proy-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vista-aerea-3-banos.jpg')"></div>
+          <div class="proy-img-bg" style="background-image:url('https://www.formosahermosa.gob.ar/wp-content/uploads/2024/05/Banado-La-Estrella-Formosa-Hermosa-11.jpg')"></div>
           <div class="proy-img-overlay"></div>
           <span class="proy-status">En ejecución</span>
         </div>
         <div class="proy-body">
           <div class="proy-title">Corredor Turístico del Bañado La Estrella</div>
-          <div class="proy-desc">Desarrollo de infraestructura de acceso, señalización y servicios para potenciar el turismo sostenible en el humedal más importante de Argentina.</div>
+          <div class="proy-desc">Desarrollo de infraestructura de acceso, señalización y servicios turísticos para potenciar el humedal más importante de Argentina como motor económico local.</div>
           <div class="proy-prog">
             <div class="proy-prog-label"><span>Avance</span><span>65%</span></div>
             <div class="proy-prog-bar"><div class="proy-prog-fill" style="width:65%"></div></div>
@@ -835,32 +964,32 @@
 
       <div class="proy-card reveal d1">
         <div class="proy-img">
-          <div class="proy-img-bg" style="background-image:url('https://www.formosahermosa.gob.ar/wp-content/uploads/2024/05/portada-banado-3.jpg')"></div>
+          <div class="proy-img-bg" style="background-image:url('https://agenfor.com.ar/wp-content/uploads/2025/10/LasLomitas1.jpg')"></div>
           <div class="proy-img-overlay"></div>
-          <span class="proy-status">En licitación</span>
+          <span class="proy-status">En ejecución</span>
         </div>
         <div class="proy-body">
-          <div class="proy-title">Plan de Pavimentación 2025</div>
-          <div class="proy-desc">Pavimentación de 14 km de calles céntricas y accesos a barrios periféricos. Mejoramiento de la conectividad urbana para más de 4.000 familias.</div>
+          <div class="proy-title">Pavimentación de 12 Calles + Ruta 81</div>
+          <div class="proy-desc">Pavimentación de 12 calles céntricas, instalación de semáforos y reductores de velocidad en el tramo urbano de la Ruta 81. 2.750 m de enripiado con iluminación en barrios periféricos.</div>
           <div class="proy-prog">
-            <div class="proy-prog-label"><span>Avance</span><span>30%</span></div>
-            <div class="proy-prog-bar"><div class="proy-prog-fill" style="width:30%"></div></div>
+            <div class="proy-prog-label"><span>Avance</span><span>40%</span></div>
+            <div class="proy-prog-bar"><div class="proy-prog-fill" style="width:40%"></div></div>
           </div>
         </div>
       </div>
 
       <div class="proy-card reveal d2">
         <div class="proy-img">
-          <div class="proy-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/amanecer-en-los-banos.jpeg')"></div>
+          <div class="proy-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/embarcacion-bano-de-la-estrella-2.jpeg')"></div>
           <div class="proy-img-overlay"></div>
-          <span class="proy-status">Proyectado</span>
+          <span class="proy-status">En ejecución</span>
         </div>
         <div class="proy-body">
-          <div class="proy-title">80 Viviendas Barrio La Esperanza</div>
-          <div class="proy-desc">Construcción de viviendas sociales en el barrio La Esperanza en convenio con el Ministerio de Vivienda de la Nación.</div>
+          <div class="proy-title">Remodelación Plaza y Costanera LED</div>
+          <div class="proy-desc">Renovación completa de la Plaza "Ejército de los Andes" y la costanera con luminaria LED. Nuevas áreas verdes y espacios recreativos para toda la familia.</div>
           <div class="proy-prog">
-            <div class="proy-prog-label"><span>Avance</span><span>10%</span></div>
-            <div class="proy-prog-bar"><div class="proy-prog-fill" style="width:10%"></div></div>
+            <div class="proy-prog-label"><span>Avance</span><span>25%</span></div>
+            <div class="proy-prog-bar"><div class="proy-prog-fill" style="width:25%"></div></div>
           </div>
         </div>
       </div>
@@ -891,40 +1020,40 @@
         <div class="card-body">
           <div class="card-meta">
             <span class="tag tag-azul">Obras Públicas</span>
-            <span class="card-fecha">15 abr. 2025</span>
+            <span class="card-fecha">Mar. 2025</span>
           </div>
-          <h3>Basualdo presentó el Plan de Obras 2025: pavimentación, agua y viviendas</h3>
-          <p>El intendente anunció un ambicioso programa de infraestructura que incluye 14 km de pavimento, ampliación de la red de agua y 80 viviendas sociales.</p>
+          <h3>Basualdo abrió sesiones con ambicioso plan de obras gestionado con Nación</h3>
+          <p>El intendente anunció pavimentación de 12 calles, remodelación de la plaza central, costanera LED y 2.750 metros de enripiado con iluminación en barrios.</p>
           <a href="#" class="card-link">Leer nota completa <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </article>
 
       <article class="card-not reveal d1">
         <div class="card-img">
-          <div class="card-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vista-de-agua-banos-de-la-estrella.jpg')"></div>
+          <div class="card-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/atardecer-2-banos-de-la-estrella.jpg')"></div>
         </div>
         <div class="card-body">
           <div class="card-meta">
             <span class="tag tag-verde">Turismo</span>
-            <span class="card-fecha">28 mar. 2025</span>
+            <span class="card-fecha">May. 2025</span>
           </div>
-          <h3>Nuevo acceso al Bañado La Estrella listo para la temporada de pesca</h3>
-          <p>La municipalidad habilitó el camino de acceso al humedal en colaboración con el gobierno provincial.</p>
+          <h3>Apertura de temporada en el Bañado La Estrella: pesca, safari y ecoturismo</h3>
+          <p>La Municipalidad habilitó el acceso al humedal para la temporada. Guías locales ofrecen travesías en lancha, safaris fotográficos y avistaje de aves al amanecer.</p>
           <a href="#" class="card-link">Leer nota completa <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </article>
 
       <article class="card-not reveal d2">
         <div class="card-img">
-          <div class="card-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/fauna-banos-arg.jpg')"></div>
+          <div class="card-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/fauna-6-banos-de-la-estrella.jpg')"></div>
         </div>
         <div class="card-body">
           <div class="card-meta">
             <span class="tag tag-ocre">Salud</span>
-            <span class="card-fecha">10 mar. 2025</span>
+            <span class="card-fecha">Abr. 2025</span>
           </div>
-          <h3>Operativo sanitario gratuito: vacunación y pediatría en los barrios</h3>
-          <p>El área de Salud municipal desplegó un operativo integral en cinco barrios, atendiendo a más de 600 vecinos.</p>
+          <h3>Operativo sanitario gratuito: vacunación y pediatría en cinco barrios</h3>
+          <p>El área de Salud municipal desplegó un operativo integral en barrios San Cayetano, Emeta, Industrial Sur, Nueva Esperanza y San Luis, atendiendo más de 600 vecinos.</p>
           <a href="#" class="card-link">Leer nota completa <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </article>
@@ -975,8 +1104,8 @@
           <div class="evt-item reveal d1">
             <div class="evt-date"><div class="evt-day">25</div><div class="evt-month">May</div></div>
             <div class="evt-info">
-              <h4>Feria de Emprendedores Locales — Temporada 2025</h4>
-              <p><i class="fa-solid fa-location-dot" style="color:var(--gris-m);margin-right:4px"></i> Plaza Central · Todo el día</p>
+              <h4>Feria de Emprendedores — Plaza Central</h4>
+              <p><i class="fa-solid fa-location-dot" style="color:var(--gris-m);margin-right:4px"></i> Plaza Ejército de los Andes · Todo el día</p>
             </div>
           </div>
           <div class="evt-item reveal d2">
@@ -998,12 +1127,12 @@
 
       <!-- Turismo highlight -->
       <div id="turismo-link" class="turismo-highlight reveal">
-        <div class="th-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/banos-de-la-estrella-puesta.jpg')"></div>
+        <div class="th-bg" style="background-image:url('https://tn.com.ar/resizer/w1DO6GhYrEoJ7cuZVoRP1o7Q4-8=/767x0/smart/filters:format(webp)/cloudfront-us-east-1.images.arcpublishing.com/artear/P34L5WHUHBA3NGCVO6WVUWKWIU.jpeg')"></div>
         <div class="th-overlay"></div>
         <div class="th-body">
           <span class="tag" style="background:var(--verde);color:#fff;">Destino Natural</span>
           <h3>Bañado La Estrella</h3>
-          <p>Una de las 7 Maravillas Naturales de Argentina. El segundo humedal más grande del país, a 65 km de Las Lomitas. Aves, yacarés, carpinchos y atardeceres que no tienen igual en el mundo.</p>
+          <p>Una de las 7 Maravillas Naturales de Argentina. El segundo humedal más grande del país, a 65 km de Las Lomitas. Aves, yacarés, carpinchos y atardeceres sin igual. Los que lo visitan no lo olvidan.</p>
           <a href="#contacto" class="btn btn-white btn-sm"><i class="fa-solid fa-map-location-dot"></i> Planificá tu visita</a>
         </div>
       </div>
@@ -1012,46 +1141,81 @@
 </section>
 
 <!-- =====================================================
-     MEDIA CENTER
+     MEDIA CENTER — Bañado La Estrella
 ===================================================== -->
 <section id="media">
   <div class="container">
     <div class="media-header reveal">
       <span class="section-kicker" style="color:rgba(255,255,255,.5);">Galería</span>
-      <h2 class="section-title">Centro de <span style="color:#67E8F9;">Medios</span></h2>
-      <p class="section-desc centered" style="color:rgba(255,255,255,.55);">Imágenes del Bañado La Estrella y de la vida institucional de Las Lomitas.</p>
+      <h2 class="section-title">El <span style="color:#67E8F9;">Bañado</span> en imágenes</h2>
+      <p class="section-desc centered" style="color:rgba(255,255,255,.55);">Atardeceres, amaneceres, fauna y paisajes del humedal más extraordinario de Argentina.</p>
     </div>
     <div class="media-grid">
+
+      <!-- 1. Large hero (2×2) — atardecer -->
       <div class="media-item reveal">
-        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/amanecer-en-los-banos.jpeg')"></div>
-        <div class="media-overlay"></div>
-        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
-      </div>
-      <div class="media-item reveal d1">
-        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vista-de-agua-banos-de-la-estrella.jpg')"></div>
-        <div class="media-overlay"></div>
-        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
-      </div>
-      <div class="media-item reveal d2">
-        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/fauna-banos-arg.jpg')"></div>
-        <div class="media-overlay"></div>
-        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
-      </div>
-      <div class="media-item reveal d1">
-        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vegetacion-bano-de-las-estrellas.jpeg')"></div>
-        <div class="media-overlay"></div>
-        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
-      </div>
-      <div class="media-item reveal d2">
-        <div class="media-img" style="background-image:url('https://www.formosahermosa.gob.ar/wp-content/uploads/2024/05/portada-banado-7.jpg')"></div>
-        <div class="media-overlay"></div>
-        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
-      </div>
-      <div class="media-item reveal d3">
         <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/atardecer-banos-de-la-estrella.jpeg')"></div>
         <div class="media-overlay"></div>
+        <div class="media-caption">Atardecer sobre el Bañado</div>
         <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
       </div>
+
+      <!-- 2. Top-right (3,1) — atardecer 2 -->
+      <div class="media-item reveal d1">
+        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/atardecer-2-banos-de-la-estrella.jpg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-caption">Puesta de sol</div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <!-- 3. Top-right (4,1) — puesta de sol -->
+      <div class="media-item reveal d2">
+        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/banos-de-la-estrella-puesta.jpg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-caption">Reflejos en el agua</div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <!-- 4. Mid-right (3,2) — amanecer proyungas -->
+      <div class="media-item reveal d1">
+        <div class="media-img" style="background-image:url('https://proyungas.org.ar/wp-content/uploads/2018/12/Descubriendo-el-d%C3%ADa-copia-en-baja-625x351.jpg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-caption">Amanecer en el humedal</div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <!-- 5. Mid-right (4,2) — aves -->
+      <div class="media-item reveal d2">
+        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/aves-banos-de-la-estrella.jpeg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-caption">Avifauna del Bañado</div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <!-- 6. Bottom wide (1-2, row 3) — TN photo -->
+      <div class="media-item reveal">
+        <div class="media-img" style="background-image:url('https://tn.com.ar/resizer/w1DO6GhYrEoJ7cuZVoRP1o7Q4-8=/767x0/smart/filters:format(webp)/cloudfront-us-east-1.images.arcpublishing.com/artear/P34L5WHUHBA3NGCVO6WVUWKWIU.jpeg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-caption">Paisaje del Bañado La Estrella</div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <!-- 7. Bottom (3, row 3) — palmas istock -->
+      <div class="media-item reveal d1">
+        <div class="media-img" style="background-image:url('https://media.istockphoto.com/id/1062514792/photo/sugar-palm-trees.jpg?s=170667a&w=0&k=20&c=uv3aWhK8rymc_C-meYeelFfYB5REaNNsPSQ__7CPuhk=')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-caption">Palmas del Chaco Formoseño</div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
+      <!-- 8. Bottom (4, row 3) — conocedores -->
+      <div class="media-item reveal d2">
+        <div class="media-img" style="background-image:url('https://conocedores.com/wp-content/uploads/2023/08/viajando-en-el-tiempo-la-experiencia-de-visitar-el-banado-la-estrella-en-argentina-19082023-7.webp')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-caption">Navegando el humedal</div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
+      </div>
+
     </div>
     <div style="text-align:center;margin-top:2rem;">
       <a href="#" class="btn btn-ghost"><i class="fa-solid fa-images"></i> Ver galería completa</a>
@@ -1070,7 +1234,7 @@
           <img src="https://www.diariopinion.com.ar/content/bucket/8/9338w720h720c.jpg.webp" alt="Pablo Basualdo, Intendente de Las Lomitas">
         </div>
         <div class="gob-foto-badge">
-          <strong>2023</strong>
+          <strong>2025</strong>
           <span>Intendente electo</span>
         </div>
       </div>
@@ -1079,23 +1243,23 @@
         <span class="section-kicker">Municipalidad de Las Lomitas</span>
         <h2 class="section-title">Pablo <span>Basualdo</span></h2>
         <div class="accent-line"></div>
-        <p class="gob-cargo">Intendente Municipal · Departamento Patiño, Formosa</p>
+        <p class="gob-cargo">Intendente Municipal · Desde 2025 · Departamento Patiño, Formosa</p>
         <p class="gob-bio">
-          Nacido en Las Lomitas, Pablo Basualdo asumió la intendencia con el compromiso de transformar la ciudad más calurosa del país en un ejemplo de gestión moderna, transparente y comprometida con su identidad natural y cultural. Su gobierno se centra en obras de infraestructura, turismo sostenible y participación ciudadana.
+          Nacido en Las Lomitas, Pablo Basualdo asumió la intendencia en 2025 con un mandato claro: transformar la ciudad en un ejemplo de gestión moderna, transparente y comprometida con su identidad natural y cultural. Frente a desafíos estructurales, encabeza obras gestionadas directamente con el Gobierno Nacional y lidera la proyección turística del Bañado La Estrella como motor de desarrollo local.
         </p>
 
         <div class="gob-ejes">
           <div class="gob-eje">
             <div class="gob-eje-ico"><i class="fa-solid fa-road"></i></div>
-            <div><h4>Infraestructura</h4><p>Pavimentación, agua potable y conectividad para todos los barrios.</p></div>
+            <div><h4>Infraestructura</h4><p>Pavimentación, enripiado y luminaria LED para todos los barrios.</p></div>
           </div>
           <div class="gob-eje">
             <div class="gob-eje-ico"><i class="fa-solid fa-leaf"></i></div>
-            <div><h4>Turismo Sostenible</h4><p>Potenciar el Bañado La Estrella como motor económico local.</p></div>
+            <div><h4>Turismo Sostenible</h4><p>Potenciar el Bañado La Estrella como motor económico regional.</p></div>
           </div>
           <div class="gob-eje">
             <div class="gob-eje-ico"><i class="fa-solid fa-users"></i></div>
-            <div><h4>Participación</h4><p>Presupuesto participativo y consultas ciudadanas abiertas.</p></div>
+            <div><h4>Participación</h4><p>Presupuesto participativo y audiencias ciudadanas abiertas.</p></div>
           </div>
           <div class="gob-eje">
             <div class="gob-eje-ico"><i class="fa-solid fa-scale-balanced"></i></div>
@@ -1133,14 +1297,14 @@
 </section>
 
 <!-- =====================================================
-     CONTACTO RÁPIDO
+     CONTACTO
 ===================================================== -->
 <section id="contacto" class="section">
   <div class="container">
     <div class="section-header centered reveal" style="margin-bottom:3.5rem;">
       <span class="section-kicker">Hablemos</span>
       <h2 class="section-title">Contacto <span>Municipal</span></h2>
-      <div class="accent-line" style="margin:0.85rem auto 0;"></div>
+      <div class="accent-line" style="margin:.85rem auto 0;"></div>
       <p class="section-desc centered">Estamos para atenderte. Respondemos en 48 horas hábiles.</p>
     </div>
     <div class="con-layout">
@@ -1276,7 +1440,7 @@
 
 <!-- =====================================================
      JAVASCRIPT
-     1. WebGL Shader Hero (ported from animated-shader-hero.tsx)
+     1. Scroll Expansion Hero (port of scroll-expansion-hero.tsx)
      2. Header scroll
      3. Mobile menu
      4. Scroll reveal
@@ -1285,148 +1449,142 @@
 ===================================================== -->
 <script>
 /* ────────────────────────────────────────────────────
-   1. WEBGL ANIMATED SHADER HERO
-   Ported from animated-shader-hero.tsx (React → Vanilla JS)
-   Original shader by Matthias Hurrle (@atzedent)
-   Modified color palette for institutional blue/teal/green
+   1. SCROLL EXPANSION HERO
+   Port of scroll-expansion-hero.tsx (React + framer-motion → Vanilla JS)
+   Original: shadcn/ui component
+   Ported: pure DOM manipulation, no dependencies
 ──────────────────────────────────────────────────── */
-(function initShader() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
+(function initScrollHero() {
+  const bg        = document.getElementById('sh-bg');
+  const mediaWrap = document.getElementById('sh-media-wrap');
+  const dark      = document.getElementById('sh-dark');
+  const w1        = document.getElementById('sh-w1');
+  const w2        = document.getElementById('sh-w2');
+  const hint      = document.getElementById('sh-hint');
+  const after     = document.getElementById('sh-after');
 
-  const gl = canvas.getContext('webgl2');
-  if (!gl) { console.warn('WebGL2 not supported'); return; }
+  if (!bg || !mediaWrap || !w1 || !after) return;
 
-  /* Vertex shader */
-  const VERT = `#version 300 es
-precision highp float;
-in vec4 position;
-void main(){ gl_Position = position; }`;
+  let progress    = 0;   // 0 → 1
+  let expanded    = false;
+  let touchStartY = 0;
 
-  /* Fragment shader — modified teal/blue/green palette */
-  const FRAG = `#version 300 es
-precision highp float;
-out vec4 O;
-uniform vec2 resolution;
-uniform float time;
-uniform vec2 touch;
-#define FC gl_FragCoord.xy
-#define T time
-#define R resolution
-#define MN min(R.x,R.y)
+  function mob() { return window.innerWidth < 768; }
 
-float rnd(vec2 p){
-  p=fract(p*vec2(12.9898,78.233));
-  p+=dot(p,p+34.56);
-  return fract(p.x*p.y);
-}
-float noise(in vec2 p){
-  vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);
-  float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);
-  return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
-}
-float fbm(vec2 p){
-  float t=.0,a=1.; mat2 m=mat2(1.,-.5,.2,1.2);
-  for(int i=0;i<5;i++){t+=a*noise(p);p*=2.*m;a*=.5;}
-  return t;
-}
-float clouds(vec2 p){
-  float d=1.,t=.0;
-  for(float i=.0;i<3.;i++){
-    float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);
-    t=mix(t,d,a);d=a;p*=2./(i+1.);
-  }
-  return t;
-}
-void main(void){
-  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
-  vec3 col=vec3(0);
-  float bg=clouds(vec2(st.x+T*.5,-st.y));
-  uv*=1.-.3*(sin(T*.2)*.5+.5);
-  for(float i=1.;i<12.;i++){
-    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);
-    vec2 p=uv;
-    float d=length(p);
-    /* Teal/Blue/Green palette — institutional + Bañado */
-    col+=.00125/d*(cos(sin(i)*vec3(3.0,1.8,0.6))+1.);
-    float b=noise(i+p+bg*1.731);
-    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
-    col=mix(col,vec3(bg*.04,bg*.14,bg*.30),d);
-  }
-  O=vec4(col,1);
-}`;
+  /* Apply current progress to DOM */
+  function render() {
+    const isMob  = mob();
+    const rawW   = 300 + progress * (isMob ? 650  : 1250);
+    const rawH   = 400 + progress * (isMob ? 200  : 400);
+    const tx     = progress * (isMob ? 120 : 150);   // vw units
+    const radius = Math.round(16 * (1 - progress));
 
-  /* Compile helper */
-  function compile(type, src) {
-    const s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
-      console.error('Shader error:', gl.getShaderInfoLog(s));
-    return s;
+    /* Expanding media */
+    if (progress >= 0.999) {
+      mediaWrap.style.width        = '100vw';
+      mediaWrap.style.height       = '100vh';
+      mediaWrap.style.borderRadius = '0';
+    } else {
+      mediaWrap.style.width        = Math.min(rawW, window.innerWidth  * 0.95) + 'px';
+      mediaWrap.style.height       = Math.min(rawH, window.innerHeight * 0.85) + 'px';
+      mediaWrap.style.borderRadius = radius + 'px';
+    }
+
+    /* Background fade */
+    bg.style.opacity = String(Math.max(0, 1 - progress));
+
+    /* Dark overlay on media */
+    dark.style.opacity = String(Math.max(0, 0.42 - progress * 0.35));
+
+    /* Words split apart */
+    w1.style.transform = 'translateX(-' + tx + 'vw)';
+    w2.style.transform = 'translateX('  + tx + 'vw)';
+
+    /* Words + hint fade as expansion nears 1 */
+    const textOp = Math.max(0, 1 - progress * 3.5);
+    w1.style.opacity   = String(textOp);
+    w2.style.opacity   = String(textOp);
+    hint.style.opacity = String(Math.max(0, 1 - progress * 2.5));
+
+    /* After-content reveal */
+    if (progress >= 1) {
+      after.classList.add('visible');
+    } else {
+      after.classList.remove('visible');
+    }
   }
 
-  const prog = gl.createProgram();
-  gl.attachShader(prog, compile(gl.VERTEX_SHADER,   VERT));
-  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
-  gl.linkProgram(prog);
+  /* Apply a scroll delta and update state */
+  function applyDelta(delta) {
+    const prev = progress;
+    progress = Math.min(1, Math.max(0, progress + delta));
+    if (progress !== prev) render();
 
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,1,-1,-1,1,1,1,-1]), gl.STATIC_DRAW);
-
-  const pos  = gl.getAttribLocation(prog, 'position');
-  gl.enableVertexAttribArray(pos);
-  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
-
-  const uRes   = gl.getUniformLocation(prog, 'resolution');
-  const uTime  = gl.getUniformLocation(prog, 'time');
-  const uTouch = gl.getUniformLocation(prog, 'touch');
-
-  let touch = [0, 0];
-  canvas.addEventListener('mousemove', e => {
-    touch = [e.clientX * dpr, canvas.height - e.clientY * dpr];
-  }, { passive:true });
-
-  let dpr = 1;
-
-  function resize() {
-    dpr = Math.max(1, 0.5 * devicePixelRatio);
-    canvas.width  = innerWidth  * dpr;
-    canvas.height = innerHeight * dpr;
-    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (progress >= 1 && !expanded) expanded = true;
+    if (progress <  1 &&  expanded) expanded = false;
   }
-  resize();
-  window.addEventListener('resize', resize, { passive:true });
 
-  function loop(now) {
-    gl.clearColor(0, 0, 0, 1);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.useProgram(prog);
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.uniform2f(uRes,   canvas.width, canvas.height);
-    gl.uniform1f(uTime,  now * 0.001);
-    gl.uniform2f(uTouch, touch[0], touch[1]);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
+  /* ── Wheel ── */
+  window.addEventListener('wheel', function(e) {
+    if (expanded && e.deltaY < 0 && window.scrollY <= 5) {
+      /* User scrolling up at the very top — collapse the hero */
+      expanded = false;
+      e.preventDefault();
+    } else if (!expanded) {
+      e.preventDefault();
+      applyDelta(e.deltaY * 0.0009);
+    }
+  }, { passive: false });
+
+  /* Keep page scrolled to top while hero isn't fully expanded */
+  window.addEventListener('scroll', function() {
+    if (!expanded) window.scrollTo(0, 0);
+  }, { passive: true });
+
+  /* ── Touch ── */
+  window.addEventListener('touchstart', function(e) {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', function(e) {
+    if (!touchStartY) return;
+    var deltaY = touchStartY - e.touches[0].clientY;
+
+    if (expanded && deltaY < -20 && window.scrollY <= 5) {
+      expanded = false;
+      e.preventDefault();
+    } else if (!expanded) {
+      e.preventDefault();
+      /* Higher sensitivity when scrolling back */
+      var factor = deltaY < 0 ? 0.008 : 0.005;
+      applyDelta(deltaY * factor);
+      touchStartY = e.touches[0].clientY;
+    }
+  }, { passive: false });
+
+  window.addEventListener('touchend', function() { touchStartY = 0; }, { passive: true });
+
+  /* Initial render (sets correct sizes on load) */
+  render();
+  window.addEventListener('resize', render, { passive: true });
+
 })();
 
 /* ────────────────────────────────────────────────────
    2. HEADER SCROLL
 ──────────────────────────────────────────────────── */
-const hdr = document.getElementById('header');
-window.addEventListener('scroll', () =>
-  hdr.classList.toggle('scrolled', scrollY > 60), { passive:true });
+var hdr = document.getElementById('header');
+window.addEventListener('scroll', function() {
+  hdr.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
 
 /* ────────────────────────────────────────────────────
    3. MOBILE MENU
 ──────────────────────────────────────────────────── */
-const hbg  = document.getElementById('hbg');
-const mnav = document.getElementById('mob-nav');
-hbg.addEventListener('click', () => {
-  const on = mnav.classList.toggle('on');
+var hbg  = document.getElementById('hbg');
+var mnav = document.getElementById('mob-nav');
+hbg.addEventListener('click', function() {
+  var on = mnav.classList.toggle('on');
   hbg.classList.toggle('on', on);
   document.body.style.overflow = on ? 'hidden' : '';
 });
@@ -1439,47 +1597,53 @@ function cm() {
 /* ────────────────────────────────────────────────────
    4. SCROLL REVEAL
 ──────────────────────────────────────────────────── */
-const revObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('vis'); revObs.unobserve(e.target); }
+var revObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      revObs.unobserve(e.target);
+    }
   });
-}, { threshold:.1, rootMargin:'0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+}, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
 
 /* ────────────────────────────────────────────────────
    5. CONTACT FORM
 ──────────────────────────────────────────────────── */
-const frm   = document.getElementById('frm');
-const frmOk = document.getElementById('form-ok');
-frm.addEventListener('submit', e => {
+var frm   = document.getElementById('frm');
+var frmOk = document.getElementById('form-ok');
+frm.addEventListener('submit', function(e) {
   e.preventDefault();
-  let ok = true;
-  frm.querySelectorAll('[required]').forEach(f => {
+  var ok = true;
+  frm.querySelectorAll('[required]').forEach(function(f) {
     if (!f.value.trim()) {
       ok = false;
       f.style.borderColor = '#DC2626';
-      setTimeout(() => f.style.borderColor = '', 3000);
+      setTimeout(function() { f.style.borderColor = ''; }, 3000);
     }
   });
   if (!ok) return;
-  const btn = frm.querySelector('button[type=submit]');
+  var btn = frm.querySelector('button[type=submit]');
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
   btn.disabled = true;
-  setTimeout(() => { frm.style.display = 'none'; frmOk.style.display = 'block'; }, 1500);
+  setTimeout(function() {
+    frm.style.display  = 'none';
+    frmOk.style.display = 'block';
+  }, 1500);
 });
 
 /* ────────────────────────────────────────────────────
    6. SMOOTH ANCHOR SCROLL
 ──────────────────────────────────────────────────── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var id = a.getAttribute('href');
     if (id === '#') return;
-    const target = document.querySelector(id);
+    var target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
     window.scrollTo({
-      top: target.getBoundingClientRect().top + scrollY - 72,
+      top: target.getBoundingClientRect().top + window.scrollY - 72,
       behavior: 'smooth'
     });
   });
