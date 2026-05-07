@@ -4,775 +4,928 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Municipalidad de Las Lomitas | Formosa, Argentina</title>
-  <meta name="description" content="Municipalidad de Las Lomitas, departamento Patiño, provincia de Formosa. Gobierno local, servicios municipales y turismo.">
+  <meta name="description" content="Sitio oficial de la Municipalidad de Las Lomitas, Departamento Patiño, Formosa. Intendente Pablo Basualdo.">
+  <meta name="theme-color" content="#0066CC">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Nunito Sans + Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
-    /* ================================================
-       VARIABLES Y RESET
-    ================================================ */
-    :root {
-      --v-oscuro:   #1B4332;
-      --v-medio:    #2D6A4F;
-      --v-claro:    #40916C;
-      --v-suave:    #95D5B2;
-      --ocre:       #C8873A;
-      --tierra:     #8B5E3C;
-      --dorado:     #D4AF37;
-      --blanco:     #FAFAF8;
-      --gris-claro: #F0EDE8;
-      --gris-med:   #C4B9AE;
-      --txt-osc:    #1A1A1A;
-      --txt-med:    #4A4A4A;
-      --sombra:     0 4px 20px rgba(27,67,50,.12);
-      --sombra-h:   0 8px 32px rgba(27,67,50,.22);
-      --r:          12px;
-      --ease:       all .3s cubic-bezier(.4,0,.2,1);
-    }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; font-size:16px; }
-    body { font-family:'DM Sans',sans-serif; color:var(--txt-osc); background:var(--blanco); overflow-x:hidden; }
-    a { text-decoration:none; color:inherit; }
-    img { max-width:100%; display:block; }
+  /* =====================================================
+     DESIGN TOKENS — Buenos Aires institutional style
+  ===================================================== */
+  :root {
+    --azul:       #0066CC;
+    --azul-osc:   #004499;
+    --azul-viv:   #0080FF;
+    --azul-claro: #EBF3FF;
+    --verde:      #2D8659;
+    --verde-osc:  #1A5C3A;
+    --verde-claro:#EBF7F2;
+    --ocre:       #D4A574;
+    --ocre-claro: #FBF4EC;
+    --blanco:     #FFFFFF;
+    --gris-f:     #F7F8FA;
+    --gris-l:     #E5E7EB;
+    --gris-m:     #6B7280;
+    --gris-osc:   #374151;
+    --negro:      #111827;
+    --danger:     #DC2626;
+    --r:          10px;
+    --r-lg:       16px;
+    --shadow-s:   0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-m:   0 4px 16px rgba(0,0,0,.08);
+    --shadow-l:   0 12px 40px rgba(0,0,0,.1);
+    --ease:       cubic-bezier(.4,0,.2,1);
+  }
 
-    /* ================================================
-       TIPOGRAFÍA
-    ================================================ */
-    h1,h2,h3 { font-family:'Playfair Display',serif; }
+  /* =====================================================
+     BASE
+  ===================================================== */
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; font-size:16px; }
+  body {
+    font-family:'Nunito Sans',sans-serif;
+    color:var(--negro); background:var(--blanco);
+    overflow-x:hidden; line-height:1.6;
+  }
+  a { text-decoration:none; color:inherit; }
+  img { display:block; max-width:100%; }
+  ul { list-style:none; }
 
-    .lbl {
-      font-family:'DM Sans',sans-serif;
-      font-size:.73rem; font-weight:600;
-      letter-spacing:.15em; text-transform:uppercase;
-      color:var(--ocre); margin-bottom:.75rem;
-    }
-    .titulo-seccion {
-      font-size:clamp(1.7rem,4vw,2.7rem);
-      line-height:1.15; color:var(--v-oscuro); margin-bottom:1.2rem;
-    }
-    .desc-seccion {
-      font-size:1.04rem; line-height:1.75;
-      color:var(--txt-med); max-width:560px;
-    }
+  /* =====================================================
+     UTILIDADES
+  ===================================================== */
+  .container { max-width:1280px; margin:0 auto; padding:0 1.5rem; }
+  .section    { padding:5rem 0; }
+  .section-sm { padding:3.5rem 0; }
+  .section-lg { padding:7rem 0; }
 
-    /* ================================================
-       BOTONES
-    ================================================ */
-    .btn {
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.85rem 1.75rem; border-radius:50px;
-      font-family:'DM Sans',sans-serif; font-weight:600;
-      font-size:.95rem; transition:var(--ease);
-      cursor:pointer; border:none;
-    }
-    .btn-prim  { background:var(--v-oscuro); color:var(--blanco); }
-    .btn-prim:hover  { background:var(--v-medio); transform:translateY(-2px); box-shadow:0 6px 24px rgba(27,67,50,.3); }
-    .btn-sec   { background:transparent; color:var(--blanco); border:2px solid rgba(255,255,255,.6); }
-    .btn-sec:hover   { background:rgba(255,255,255,.12); border-color:#fff; transform:translateY(-2px); }
-    .btn-ocre  { background:var(--ocre); color:var(--blanco); }
-    .btn-ocre:hover  { background:var(--tierra); transform:translateY(-2px); box-shadow:0 6px 24px rgba(200,135,58,.4); }
+  .section-header { margin-bottom:3rem; }
+  .section-header.centered { text-align:center; }
+  .section-kicker {
+    display:inline-block; font-size:.72rem; font-weight:800;
+    letter-spacing:.16em; text-transform:uppercase;
+    color:var(--azul); margin-bottom:.6rem;
+  }
+  .section-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.75rem,3.5vw,2.5rem);
+    line-height:1.15; color:var(--negro);
+  }
+  .section-title span { color:var(--azul); }
+  .section-desc { margin-top:.75rem; color:var(--gris-m); font-size:1.02rem; line-height:1.75; max-width:560px; }
+  .section-desc.centered { margin:0 auto; text-align:center; }
 
-    /* ================================================
-       HEADER
-    ================================================ */
-    #header {
-      position:fixed; top:0; left:0; right:0; z-index:1000;
-      background:transparent; transition:var(--ease); padding:1.2rem 0;
-    }
-    #header.scrolled {
-      background:var(--v-oscuro); padding:.75rem 0;
-      box-shadow:0 2px 20px rgba(0,0,0,.18);
-    }
-    .hd-inner {
-      max-width:1280px; margin:0 auto; padding:0 2rem;
-      display:flex; align-items:center; justify-content:space-between;
-    }
-    .logo-wrap { display:flex; align-items:center; gap:1rem; }
-    .logo-escudo {
-      width:50px; height:50px; border-radius:50%;
-      background:var(--dorado); display:flex; align-items:center;
-      justify-content:center; font-size:1.35rem;
-      color:var(--v-oscuro); flex-shrink:0;
-    }
-    .logo-txt { color:#fff; }
-    .logo-txt .sup  { display:block; font-size:.62rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; opacity:.75; }
-    .logo-txt .city { display:block; font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; line-height:1.1; }
-    .logo-txt .prov { display:block; font-size:.6rem; opacity:.65; letter-spacing:.08em; }
+  /* Tags */
+  .tag {
+    display:inline-block; padding:.18rem .7rem; border-radius:50px;
+    font-size:.68rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+  }
+  .tag-azul   { background:var(--azul-claro); color:var(--azul); }
+  .tag-verde  { background:var(--verde-claro); color:var(--verde-osc); }
+  .tag-ocre   { background:var(--ocre-claro); color:#92400E; }
+  .tag-gris   { background:var(--gris-f); color:var(--gris-osc); }
 
-    /* Navegación desktop */
-    .nav-list { display:flex; align-items:center; gap:.2rem; list-style:none; }
-    .nav-list a {
-      display:block; padding:.48rem .8rem;
-      color:rgba(255,255,255,.85); font-size:.85rem; font-weight:500;
-      border-radius:6px; transition:var(--ease); white-space:nowrap;
-    }
-    .nav-list a:hover { color:#fff; background:rgba(255,255,255,.1); }
-    .nav-cta {
-      background:var(--dorado) !important;
-      color:var(--v-oscuro) !important;
-      font-weight:700 !important;
-      border-radius:50px !important;
-      padding:.48rem 1.1rem !important;
-    }
-    .nav-cta:hover { background:#c49b20 !important; }
+  /* Buttons */
+  .btn {
+    display:inline-flex; align-items:center; gap:.5rem;
+    padding:.75rem 1.6rem; border-radius:8px; border:none;
+    font-family:'Nunito Sans',sans-serif; font-weight:700;
+    font-size:.9rem; cursor:pointer; transition:all .22s var(--ease);
+    white-space:nowrap;
+  }
+  .btn-azul   { background:var(--azul); color:#fff; }
+  .btn-azul:hover { background:var(--azul-osc); transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,102,204,.28); }
+  .btn-outline { background:transparent; color:var(--azul); border:1.5px solid var(--azul); }
+  .btn-outline:hover { background:var(--azul-claro); }
+  .btn-white  { background:#fff; color:var(--azul); }
+  .btn-white:hover { background:var(--azul-claro); transform:translateY(-1px); }
+  .btn-ghost  { background:rgba(255,255,255,.12); color:#fff; border:1.5px solid rgba(255,255,255,.35); }
+  .btn-ghost:hover { background:rgba(255,255,255,.22); border-color:rgba(255,255,255,.6); }
+  .btn-sm { padding:.5rem 1.1rem; font-size:.82rem; }
+  .btn-lg { padding:1rem 2.2rem; font-size:1rem; border-radius:10px; }
 
-    /* Hamburger */
-    .hamburger {
-      display:none; flex-direction:column; gap:5px;
-      background:none; border:none; cursor:pointer; padding:4px;
-    }
-    .hamburger span {
-      display:block; width:26px; height:2px;
-      background:#fff; border-radius:2px; transition:var(--ease);
-    }
-    .hamburger.on span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-    .hamburger.on span:nth-child(2) { opacity:0; }
-    .hamburger.on span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  /* Divider accent */
+  .accent-line {
+    width:3.5rem; height:3px; background:var(--azul);
+    border-radius:2px; margin-top:.85rem;
+  }
+  .accent-line.green { background:var(--verde); }
 
-    /* Nav mobile overlay */
-    .nav-mobile {
-      display:none; position:fixed; inset:0;
-      background:var(--v-oscuro); z-index:999;
-      padding:7rem 2rem 2rem; flex-direction:column;
-      align-items:flex-start; gap:.4rem;
-    }
-    .nav-mobile.on { display:flex; }
-    .nav-mobile a {
-      color:#fff; font-family:'Playfair Display',serif;
-      font-size:1.75rem; font-weight:700;
-      padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.1);
-      width:100%; transition:var(--ease);
-    }
-    .nav-mobile a:hover { color:var(--dorado); padding-left:.5rem; }
+  /* =====================================================
+     HEADER
+  ===================================================== */
+  #header {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(255,255,255,.97); backdrop-filter:blur(12px);
+    border-bottom:1px solid transparent;
+    transition:all .3s var(--ease);
+    padding:.65rem 0;
+  }
+  #header.scrolled {
+    border-bottom-color:var(--gris-l);
+    box-shadow:var(--shadow-s);
+  }
+  .hd-wrap { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
 
-    /* ================================================
-       HERO
-    ================================================ */
-    #inicio {
-      min-height:100vh; position:relative;
-      display:flex; align-items:center; overflow:hidden;
-    }
-    .hero-bg {
-      position:absolute; inset:0;
-      background:
-        linear-gradient(135deg,
-          rgba(27,67,50,.84) 0%,
-          rgba(45,106,79,.72) 38%,
-          rgba(200,135,58,.58) 75%,
-          rgba(139,94,60,.82) 100%),
-        url('https://laderasur.com/wp-content/uploads/2024/10/vista-aerea-3-banos.jpg') center/cover no-repeat;
-    }
-    /* Patrón sutil de puntos */
-    .hero-pat {
-      position:absolute; inset:0; opacity:.055;
-      background-image:
-        radial-gradient(circle, rgba(149,213,178,1) 1.5px, transparent 1.5px),
-        radial-gradient(circle, rgba(212,175,55,1) 1px, transparent 1px);
-      background-size:70px 70px, 45px 45px;
-      background-position:0 0, 35px 35px;
-    }
-    .hero-inner {
-      position:relative; z-index:2;
-      max-width:1280px; margin:0 auto;
-      padding:8rem 2rem 4rem;
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:4rem; align-items:center; width:100%;
-    }
-    .hero-cont { animation:fadeUp .8s ease-out both; }
-    .hero-badge {
-      display:inline-flex; align-items:center; gap:.5rem;
-      background:rgba(212,175,55,.18);
-      border:1px solid rgba(212,175,55,.4);
-      color:var(--dorado); font-size:.75rem; font-weight:600;
-      letter-spacing:.1em; text-transform:uppercase;
-      padding:.4rem 1rem; border-radius:50px; margin-bottom:1.5rem;
-    }
-    .hero-h1 {
-      font-size:clamp(2.4rem,5.5vw,4.4rem);
-      line-height:1.05; color:#fff; margin-bottom:1rem;
-    }
-    .hero-h1 em { color:var(--dorado); font-style:italic; }
-    .hero-sub {
-      font-size:1.07rem; line-height:1.75;
-      color:rgba(255,255,255,.8); margin-bottom:2.5rem; max-width:480px;
-    }
-    .hero-ctas { display:flex; flex-wrap:wrap; gap:1rem; }
+  /* Logo */
+  .logo { display:flex; align-items:center; gap:.8rem; flex-shrink:0; }
+  .logo-mark {
+    width:42px; height:42px; border-radius:8px;
+    background:var(--azul); display:flex; align-items:center;
+    justify-content:center; color:#fff; font-size:1.1rem; flex-shrink:0;
+  }
+  .logo-info { line-height:1.1; }
+  .logo-pre  { font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gris-m); }
+  .logo-name { font-size:1.02rem; font-weight:800; color:var(--negro); }
+  .logo-sub  { font-size:.6rem; color:var(--gris-m); }
 
-    /* Stats glassmorphism */
-    .hero-stats {
-      display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;
-      animation:fadeUp .8s .18s ease-out both;
-    }
-    .hero-stat {
-      background:rgba(255,255,255,.08);
-      backdrop-filter:blur(12px);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:var(--r); padding:1.5rem; transition:var(--ease);
-    }
-    .hero-stat:hover { background:rgba(255,255,255,.14); transform:translateY(-3px); }
-    .stat-num { font-family:'Playfair Display',serif; font-size:2.2rem; color:var(--dorado); font-weight:700; line-height:1; }
-    .stat-lbl { font-size:.8rem; color:rgba(255,255,255,.7); margin-top:.35rem; font-weight:500; }
+  /* Main nav */
+  .main-nav ul { display:flex; align-items:center; gap:.08rem; }
+  .main-nav a {
+    display:block; padding:.45rem .72rem; font-size:.82rem; font-weight:700;
+    color:var(--gris-osc); border-radius:6px; transition:all .18s; white-space:nowrap;
+  }
+  .main-nav a:hover { color:var(--azul); background:var(--azul-claro); }
+  .main-nav .active { color:var(--azul); }
 
-    /* Scroll indicator */
-    .scroll-ind {
-      position:absolute; bottom:2.5rem; left:50%;
-      transform:translateX(-50%); z-index:2;
-      display:flex; flex-direction:column; align-items:center; gap:.5rem;
-      color:rgba(255,255,255,.45); font-size:.7rem;
-      letter-spacing:.1em; text-transform:uppercase;
-      animation:bounce 2.2s ease-in-out infinite;
-    }
+  /* Header CTA */
+  .hd-cta { display:flex; align-items:center; gap:.65rem; flex-shrink:0; }
+  .btn-ciudadano {
+    display:flex; align-items:center; gap:.4rem;
+    padding:.45rem 1rem; border-radius:8px;
+    background:var(--azul); color:#fff;
+    font-size:.8rem; font-weight:700; border:none;
+    cursor:pointer; transition:all .2s;
+  }
+  .btn-ciudadano:hover { background:var(--azul-osc); }
 
-    /* ================================================
-       ACCESOS RÁPIDOS
-    ================================================ */
-    #servicios { background:var(--v-oscuro); padding:3.5rem 0; }
-    .acc-inner { max-width:1280px; margin:0 auto; padding:0 2rem; }
-    .acc-ttl {
-      text-align:center; color:rgba(255,255,255,.55);
-      font-size:.72rem; font-weight:600; letter-spacing:.15em;
-      text-transform:uppercase; margin-bottom:1.75rem;
-    }
-    .acc-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:1rem; }
-    .acc-item {
-      display:flex; flex-direction:column; align-items:center; gap:.7rem;
-      padding:1.5rem 1rem;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:var(--r); cursor:pointer; transition:var(--ease); text-align:center;
-    }
-    .acc-item:hover { background:rgba(255,255,255,.13); border-color:var(--dorado); transform:translateY(-4px); }
-    .acc-ico {
-      width:50px; height:50px; border-radius:14px;
-      display:flex; align-items:center; justify-content:center; font-size:1.35rem;
-    }
-    .acc-lbl { color:rgba(255,255,255,.85); font-size:.78rem; font-weight:500; line-height:1.3; }
+  /* Hamburger */
+  .hbg { display:none; background:none; border:none; cursor:pointer; padding:4px; flex-direction:column; gap:4px; }
+  .hbg span { display:block; width:24px; height:2px; background:var(--negro); border-radius:2px; transition:all .3s; }
+  .hbg.on span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+  .hbg.on span:nth-child(2) { opacity:0; }
+  .hbg.on span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
 
-    /* ================================================
-       NOTICIAS
-    ================================================ */
-    #noticias { padding:6rem 0; background:var(--blanco); }
-    .not-inner { max-width:1280px; margin:0 auto; padding:0 2rem; }
-    .not-hd {
-      display:flex; align-items:flex-end; justify-content:space-between;
-      margin-bottom:3rem; gap:1rem; flex-wrap:wrap;
-    }
-    .not-grid { display:grid; grid-template-columns:1.45fr 1fr 1fr; gap:1.4rem; }
-    .card-not {
-      background:var(--blanco); border-radius:var(--r);
-      overflow:hidden; border:1px solid #E8E3DC; transition:var(--ease);
-    }
-    .card-not:hover { box-shadow:var(--sombra-h); transform:translateY(-4px); border-color:transparent; }
-    .card-not-img { height:220px; position:relative; overflow:hidden; }
-    .card-not:first-child .card-not-img { height:280px; }
-    .card-not-img-bg { position:absolute; inset:0; transition:transform .4s ease; }
-    .card-not:hover .card-not-img-bg { transform:scale(1.05); }
-    .card-tag {
-      position:absolute; top:1rem; left:1rem;
-      background:var(--v-oscuro); color:#fff;
-      font-size:.67rem; font-weight:700; letter-spacing:.08em;
-      text-transform:uppercase; padding:.22rem .7rem; border-radius:50px;
-    }
-    .card-body { padding:1.4rem; }
-    .card-fecha { font-size:.76rem; color:var(--gris-med); margin-bottom:.55rem; font-weight:500; }
-    .card-not h3 { font-size:1.12rem; line-height:1.35; color:var(--v-oscuro); margin-bottom:.7rem; }
-    .card-not:first-child h3 { font-size:1.42rem; }
-    .card-not p { font-size:.875rem; line-height:1.65; color:var(--txt-med); }
-    .card-link {
-      display:inline-flex; align-items:center; gap:.4rem;
-      color:var(--ocre); font-size:.83rem; font-weight:600;
-      margin-top:1rem; transition:var(--ease);
-    }
-    .card-link:hover { gap:.7rem; color:var(--tierra); }
+  /* Mobile nav */
+  .mob-nav {
+    display:none; position:fixed; top:0; inset:0;
+    background:#fff; z-index:999; padding:5rem 1.5rem 2rem;
+    flex-direction:column; overflow-y:auto;
+  }
+  .mob-nav.on { display:flex; }
+  .mob-nav a {
+    color:var(--negro); font-size:1.3rem; font-weight:700;
+    padding:.7rem 0; border-bottom:1px solid var(--gris-l); transition:color .2s;
+  }
+  .mob-nav a:hover { color:var(--azul); }
 
-    /* ================================================
-       NUESTRA CIUDAD
-    ================================================ */
-    #ciudad { padding:6rem 0; background:var(--gris-claro); position:relative; overflow:hidden; }
-    .ciudad-deco {
-      position:absolute; right:-6rem; top:-4rem;
-      width:480px; height:480px; border-radius:50%;
-      background:radial-gradient(circle,rgba(200,135,58,.08) 0%,transparent 70%);
-      pointer-events:none;
-    }
-    .ciudad-inner {
-      max-width:1280px; margin:0 auto; padding:0 2rem;
-      display:grid; grid-template-columns:1fr 1.2fr; gap:5rem;
-      align-items:center; position:relative;
-    }
-    .datos-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
-    .dato-card {
-      background:var(--blanco); border-radius:var(--r);
-      padding:1.7rem; border-bottom:3px solid transparent;
-      transition:var(--ease); box-shadow:0 2px 12px rgba(0,0,0,.05);
-    }
-    .dato-card:hover { border-bottom-color:var(--dorado); transform:translateY(-3px); box-shadow:var(--sombra); }
-    .dato-ico { font-size:1.4rem; margin-bottom:.7rem; }
-    .dato-num { font-family:'Playfair Display',serif; font-size:1.95rem; color:var(--v-oscuro); font-weight:700; line-height:1; }
-    .dato-lbl { font-size:.8rem; color:var(--txt-med); margin-top:.4rem; font-weight:500; }
+  /* =====================================================
+     HERO — WebGL Shader
+  ===================================================== */
+  #inicio {
+    position:relative; min-height:100vh; min-height:100svh;
+    display:flex; align-items:center; overflow:hidden; background:#060F18;
+  }
+  #hero-canvas {
+    position:absolute; inset:0; width:100%; height:100%; touch-action:none;
+  }
+  .hero-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(135deg,
+      rgba(0,20,50,.78) 0%,
+      rgba(0,40,90,.55) 45%,
+      rgba(0,60,30,.35) 80%,
+      rgba(0,10,30,.6) 100%
+    );
+  }
+  .hero-body {
+    position:relative; z-index:2;
+    max-width:1280px; margin:0 auto; padding:9rem 1.5rem 5rem;
+    display:grid; grid-template-columns:1.05fr .95fr; gap:4rem; align-items:center; width:100%;
+  }
+  .hero-left { animation:fadeUp .8s ease-out both; }
+  .hero-eyebrow {
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:rgba(255,255,255,.1); backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.2);
+    color:rgba(255,255,255,.9); font-size:.72rem; font-weight:800;
+    letter-spacing:.14em; text-transform:uppercase;
+    padding:.38rem 1rem; border-radius:50px; margin-bottom:1.4rem;
+  }
+  .hero-h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.6rem,5.5vw,4.8rem);
+    line-height:1.05; color:#fff; margin-bottom:1.1rem; font-weight:900;
+  }
+  .hero-h1 em { color:#67E8F9; font-style:italic; }
+  .hero-sub { font-size:1.07rem; line-height:1.8; color:rgba(255,255,255,.78); margin-bottom:2.2rem; max-width:480px; }
+  .hero-btns { display:flex; flex-wrap:wrap; gap:.85rem; }
 
-    /* ================================================
-       TURISMO
-    ================================================ */
-    #turismo { padding:6rem 0; background:var(--v-oscuro); position:relative; overflow:hidden; }
-    .tur-pat {
-      position:absolute; inset:0; opacity:.04;
-      background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
-    }
-    .tur-inner { max-width:1280px; margin:0 auto; padding:0 2rem; position:relative; }
-    .tur-hd { text-align:center; margin-bottom:4rem; }
-    .tur-hd .titulo-seccion { color:#fff; }
-    .tur-hd .desc-seccion { color:rgba(255,255,255,.75); margin:0 auto; }
-    .tur-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:1.4rem; }
-    .tur-card { border-radius:var(--r); overflow:hidden; position:relative; cursor:pointer; transition:var(--ease); }
-    .tur-card:hover { transform:translateY(-5px); }
-    .tur-img { height:300px; position:relative; overflow:hidden; }
-    .tur-card:first-child .tur-img { height:380px; }
-    .tur-img-bg { position:absolute; inset:0; transition:transform .5s ease; }
-    .tur-card:hover .tur-img-bg { transform:scale(1.07); }
-    .tur-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(27,67,50,.95) 0%,rgba(27,67,50,.18) 55%,transparent 100%); }
-    .tur-cnt { position:absolute; bottom:0; left:0; right:0; padding:1.7rem; }
-    .tur-tag {
-      display:inline-block; background:var(--dorado); color:var(--v-oscuro);
-      font-size:.66rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-      padding:.2rem .65rem; border-radius:50px; margin-bottom:.7rem;
-    }
-    .tur-card h3 { font-size:1.3rem; color:#fff; line-height:1.25; margin-bottom:.5rem; }
-    .tur-card:first-child h3 { font-size:1.72rem; }
-    .tur-card p { font-size:.84rem; color:rgba(255,255,255,.8); line-height:1.6; }
+  /* Hero right: glass cards */
+  .hero-right { animation:fadeUp .8s .18s ease-out both; }
+  .hero-cards { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .hero-card {
+    background:rgba(255,255,255,.08); backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.12); border-radius:14px;
+    padding:1.5rem; transition:all .3s var(--ease); cursor:pointer;
+  }
+  .hero-card:hover { background:rgba(255,255,255,.14); border-color:rgba(103,232,249,.4); transform:translateY(-3px); }
+  .hero-card-ico { font-size:1.6rem; margin-bottom:.75rem; }
+  .hero-card-num { font-family:'Playfair Display',serif; font-size:2.1rem; color:#67E8F9; font-weight:700; line-height:1; }
+  .hero-card-lbl { font-size:.77rem; color:rgba(255,255,255,.65); margin-top:.3rem; font-weight:600; }
 
-    /* ================================================
-       AUTORIDADES
-    ================================================ */
-    #gobierno { padding:6rem 0; background:var(--blanco); }
-    .gob-inner { max-width:1280px; margin:0 auto; padding:0 2rem; }
-    .gob-hd { text-align:center; margin-bottom:4rem; }
-    .gob-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
-    .aut-card { text-align:center; transition:var(--ease); }
-    .aut-card:hover { transform:translateY(-5px); }
-    .aut-foto {
-      width:155px; height:155px; border-radius:50%;
-      margin:0 auto 1.2rem; overflow:hidden;
-    }
-    .aut-foto-in {
-      width:100%; height:100%;
-      display:flex; align-items:center; justify-content:center;
-      font-size:3rem; color:#fff;
-    }
-    .aut-cargo { font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--ocre); margin-bottom:.4rem; }
-    .aut-nombre { font-family:'Playfair Display',serif; font-size:1.18rem; color:var(--v-oscuro); margin-bottom:.35rem; }
-    .aut-area { font-size:.81rem; color:var(--txt-med); }
+  /* Scroll indicator */
+  .scroll-ind {
+    position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+    z-index:3; display:flex; flex-direction:column; align-items:center; gap:.4rem;
+    color:rgba(255,255,255,.4); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+    animation:bounce 2.4s ease-in-out infinite;
+  }
 
-    /* ================================================
-       CONTACTO
-    ================================================ */
-    #contacto { padding:6rem 0; background:var(--gris-claro); }
-    .con-inner {
-      max-width:1280px; margin:0 auto; padding:0 2rem;
-      display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:start;
-    }
-    .con-info h2 { font-size:2.2rem; color:var(--v-oscuro); margin-bottom:1.2rem; }
-    .con-info > p { font-size:1rem; line-height:1.75; color:var(--txt-med); margin-bottom:2rem; }
-    .con-dato { display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; }
-    .con-ico {
-      width:44px; height:44px; background:var(--v-oscuro); border-radius:12px;
-      display:flex; align-items:center; justify-content:center;
-      color:var(--dorado); font-size:1rem; flex-shrink:0;
-    }
-    .con-dtxt strong { display:block; font-size:.79rem; color:var(--txt-med); margin-bottom:.15rem; font-weight:600; }
-    .con-dtxt span { font-size:.94rem; color:var(--txt-osc); font-weight:500; }
+  /* =====================================================
+     ACCESOS RÁPIDOS
+  ===================================================== */
+  #servicios { background:var(--azul); padding:0; }
+  .acc-wrap { display:grid; grid-template-columns:repeat(6,1fr); }
+  .acc-item {
+    display:flex; flex-direction:column; align-items:center; gap:.55rem;
+    padding:1.6rem 1rem; cursor:pointer; transition:background .2s; text-align:center;
+    border-right:1px solid rgba(255,255,255,.12);
+  }
+  .acc-item:last-child { border-right:none; }
+  .acc-item:hover { background:var(--azul-osc); }
+  .acc-ico {
+    width:46px; height:46px; border-radius:12px;
+    background:rgba(255,255,255,.12);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.25rem; color:#fff;
+  }
+  .acc-lbl { font-size:.73rem; font-weight:700; color:rgba(255,255,255,.88); line-height:1.25; }
 
-    /* Formulario */
-    .form-wrap { background:var(--blanco); border-radius:var(--r); padding:2.5rem; box-shadow:var(--sombra); }
-    .form-wrap h3 { font-size:1.45rem; color:var(--v-oscuro); margin-bottom:1.7rem; }
-    .fg { margin-bottom:1.2rem; }
-    .fg label { display:block; font-size:.8rem; font-weight:600; color:var(--txt-med); margin-bottom:.45rem; }
-    .fg input, .fg select, .fg textarea {
-      width:100%; padding:.84rem 1rem; border:1.5px solid #DDD8D0;
-      border-radius:8px; font-family:'DM Sans',sans-serif;
-      font-size:.95rem; color:var(--txt-osc); background:var(--blanco);
-      transition:var(--ease); outline:none;
-    }
-    .fg input:focus, .fg select:focus, .fg textarea:focus {
-      border-color:var(--v-claro);
-      box-shadow:0 0 0 3px rgba(64,145,108,.12);
-    }
-    .fg textarea { resize:vertical; min-height:118px; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-    .form-ok { display:none; text-align:center; padding:2rem; }
-    .form-ok i { font-size:3rem; color:var(--v-claro); margin-bottom:1rem; display:block; }
+  /* =====================================================
+     SERVICIOS DESTACADOS
+  ===================================================== */
+  #servicios-dest { background:var(--gris-f); }
+  .srv-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
+  .srv-card {
+    background:#fff; border-radius:var(--r-lg); padding:2rem 1.5rem;
+    border:1.5px solid var(--gris-l); transition:all .3s var(--ease); cursor:pointer;
+    display:flex; flex-direction:column; gap:1rem;
+  }
+  .srv-card:hover {
+    border-color:var(--azul); transform:translateY(-4px); box-shadow:var(--shadow-l);
+  }
+  .srv-card:hover .srv-arrow { color:var(--azul); transform:translateX(4px); }
+  .srv-ico-wrap {
+    width:56px; height:56px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.45rem;
+  }
+  .srv-title { font-size:1.05rem; font-weight:800; color:var(--negro); line-height:1.3; }
+  .srv-desc  { font-size:.85rem; color:var(--gris-m); line-height:1.65; flex:1; }
+  .srv-arrow { color:var(--gris-l); font-size:.9rem; transition:all .25s; align-self:flex-start; margin-top:auto; }
 
-    /* ================================================
-       FOOTER
-    ================================================ */
-    #footer { background:#0F1A14; color:rgba(255,255,255,.68); padding:4rem 0 0; }
-    .ft-inner {
-      max-width:1280px; margin:0 auto; padding:0 2rem;
-      display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:3rem;
-    }
-    .ft-marca h3 { font-family:'Playfair Display',serif; font-size:1.22rem; color:#fff; margin:1rem 0 .7rem; }
-    .ft-marca p { font-size:.875rem; line-height:1.7; margin-bottom:1.5rem; }
-    .redes { display:flex; gap:.7rem; }
-    .red {
-      width:38px; height:38px; border-radius:10px;
-      background:rgba(255,255,255,.09);
-      display:flex; align-items:center; justify-content:center;
-      color:#fff; font-size:.9rem; transition:var(--ease); cursor:pointer;
-    }
-    .red:hover { background:var(--dorado); color:var(--v-oscuro); transform:translateY(-2px); }
-    .ft-col h4 { font-family:'DM Sans',sans-serif; font-size:.73rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:1.2rem; }
-    .ft-links { list-style:none; display:flex; flex-direction:column; gap:.58rem; }
-    .ft-links a { font-size:.88rem; color:rgba(255,255,255,.68); transition:var(--ease); }
-    .ft-links a:hover { color:var(--dorado); padding-left:.25rem; }
-    .ft-horario { font-size:.875rem; line-height:1.85; }
-    .ft-bottom {
-      max-width:1280px; margin:0 auto; padding:1.5rem 2rem;
-      border-top:1px solid rgba(255,255,255,.07);
-      display:flex; align-items:center; justify-content:space-between;
-      gap:1rem; flex-wrap:wrap; margin-top:3rem;
-    }
-    .ft-bottom p { font-size:.78rem; }
-    .ft-blinks { display:flex; gap:1.5rem; }
-    .ft-blinks a { font-size:.78rem; color:rgba(255,255,255,.45); transition:var(--ease); }
-    .ft-blinks a:hover { color:var(--dorado); }
+  /* =====================================================
+     PROYECTOS ESTRATÉGICOS
+  ===================================================== */
+  #proyectos { background:#fff; }
+  .proy-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+  .proy-card {
+    border-radius:var(--r-lg); overflow:hidden; cursor:pointer;
+    box-shadow:var(--shadow-s); border:1.5px solid var(--gris-l);
+    transition:all .3s var(--ease); background:#fff;
+  }
+  .proy-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-l); border-color:transparent; }
+  .proy-img {
+    height:200px; position:relative; overflow:hidden;
+  }
+  .proy-img-bg {
+    position:absolute; inset:0; background-size:cover; background-position:center;
+    transition:transform .5s ease;
+  }
+  .proy-card:hover .proy-img-bg { transform:scale(1.06); }
+  .proy-img-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to top,rgba(0,68,153,.7) 0%,transparent 60%);
+  }
+  .proy-status {
+    position:absolute; top:.9rem; left:.9rem;
+    background:#fff; color:var(--azul);
+    font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    padding:.2rem .65rem; border-radius:50px;
+  }
+  .proy-body { padding:1.4rem; }
+  .proy-title { font-size:1.05rem; font-weight:800; color:var(--negro); margin-bottom:.5rem; line-height:1.3; }
+  .proy-desc  { font-size:.84rem; color:var(--gris-m); line-height:1.65; margin-bottom:1rem; }
+  .proy-prog  { margin-top:.75rem; }
+  .proy-prog-label { display:flex; justify-content:space-between; font-size:.73rem; font-weight:700; color:var(--gris-osc); margin-bottom:.35rem; }
+  .proy-prog-bar   { height:5px; background:var(--gris-l); border-radius:3px; overflow:hidden; }
+  .proy-prog-fill  { height:100%; background:var(--azul); border-radius:3px; }
 
-    /* ================================================
-       BANNER INTENDENTE
-    ================================================ */
-    .intendente-banner {
-      position:relative; overflow:hidden; min-height:460px;
-      display:flex; align-items:center;
-    }
-    .intendente-foto-bg {
-      position:absolute; inset:0;
-      background-size:cover; background-position:center 20%;
-    }
-    .intendente-velo {
-      position:absolute; inset:0;
-      background:linear-gradient(to right,
-        rgba(11,22,16,.97) 0%,
-        rgba(11,22,16,.88) 40%,
-        rgba(27,67,50,.55) 70%,
-        rgba(27,67,50,.2) 100%);
-    }
-    .intendente-cnt {
-      position:relative; z-index:2;
-      max-width:1280px; margin:0 auto; padding:5rem 2rem; width:100%;
-    }
-    .intendente-cnt blockquote {
-      font-family:'Playfair Display',serif;
-      font-size:clamp(1.5rem,3vw,2.2rem);
-      color:#fff; line-height:1.3; font-style:italic;
-      max-width:620px; margin-bottom:1.75rem;
-      border-left:4px solid var(--dorado); padding-left:1.5rem;
-    }
-    .intendente-cnt cite {
-      font-family:'DM Sans',sans-serif; font-style:normal;
-      color:var(--dorado); font-weight:700; font-size:1.05rem;
-      letter-spacing:.04em; padding-left:1.5rem;
-    }
-    .intendente-cnt .cargo-cita {
-      display:block; font-weight:400; font-size:.83rem;
-      color:rgba(255,255,255,.6); margin-top:.25rem;
-    }
+  /* =====================================================
+     NOTICIAS
+  ===================================================== */
+  #noticias { background:var(--gris-f); }
+  .not-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+  .card-not {
+    background:#fff; border-radius:var(--r-lg); overflow:hidden;
+    border:1.5px solid var(--gris-l); transition:all .3s var(--ease); cursor:pointer;
+  }
+  .card-not:hover { transform:translateY(-4px); box-shadow:var(--shadow-l); border-color:transparent; }
+  .card-img { height:200px; position:relative; overflow:hidden; }
+  .card-img-bg {
+    position:absolute; inset:0; background-size:cover; background-position:center;
+    transition:transform .4s ease;
+  }
+  .card-not:hover .card-img-bg { transform:scale(1.05); }
+  .card-body { padding:1.3rem; }
+  .card-meta { display:flex; align-items:center; gap:.65rem; margin-bottom:.65rem; flex-wrap:wrap; }
+  .card-fecha { font-size:.73rem; color:var(--gris-m); font-weight:600; }
+  .card-not h3 { font-size:1rem; font-weight:800; color:var(--negro); line-height:1.35; margin-bottom:.55rem; }
+  .card-not p  { font-size:.83rem; color:var(--gris-m); line-height:1.65; }
+  .card-link {
+    display:inline-flex; align-items:center; gap:.35rem;
+    color:var(--azul); font-size:.82rem; font-weight:800;
+    margin-top:.85rem; transition:gap .2s;
+  }
+  .card-link:hover { gap:.55rem; }
 
-    /* ================================================
-       BANNER FOTO BAÑADO (strip parallax)
-    ================================================ */
-    .foto-banner {
-      height:360px; position:relative; overflow:hidden;
-    }
-    .foto-banner-img {
-      position:absolute; inset:-30px;
-      background-size:cover; background-position:center;
-      background-attachment:fixed;
-    }
-    .foto-banner-velo {
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .foto-banner-txt {
-      text-align:center; padding:0 2rem; max-width:780px;
-    }
-    .foto-banner-txt blockquote {
-      font-family:'Playfair Display',serif;
-      font-size:clamp(1.6rem,3.5vw,2.5rem);
-      color:#fff; line-height:1.2; font-style:italic;
-      margin-bottom:1rem;
-    }
-    .foto-banner-txt cite {
-      font-family:'DM Sans',sans-serif; font-style:normal;
-      font-size:.85rem; font-weight:600; letter-spacing:.12em;
-      text-transform:uppercase; color:var(--dorado);
-    }
+  /* =====================================================
+     EVENTOS
+  ===================================================== */
+  #eventos { background:#fff; }
+  .evt-layout { display:grid; grid-template-columns:1fr 2fr; gap:4rem; align-items:start; }
+  .evt-list { display:flex; flex-direction:column; gap:.85rem; }
+  .evt-item {
+    display:flex; gap:1rem; align-items:flex-start; padding:1.1rem;
+    border-radius:var(--r); border:1.5px solid var(--gris-l); transition:all .25s;
+  }
+  .evt-item:hover { border-color:var(--azul); background:var(--azul-claro); }
+  .evt-date {
+    display:flex; flex-direction:column; align-items:center;
+    background:var(--azul); color:#fff; border-radius:8px;
+    padding:.5rem .8rem; min-width:52px; flex-shrink:0;
+  }
+  .evt-day   { font-size:1.5rem; font-weight:800; line-height:1; }
+  .evt-month { font-size:.65rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; opacity:.85; }
+  .evt-info h4 { font-size:.95rem; font-weight:800; color:var(--negro); margin-bottom:.2rem; }
+  .evt-info p  { font-size:.8rem; color:var(--gris-m); }
 
-    /* ================================================
-       ANIMACIONES
-    ================================================ */
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(28px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    @keyframes bounce {
-      0%,100% { transform:translateX(-50%) translateY(0); }
-      50%      { transform:translateX(-50%) translateY(8px); }
-    }
-    .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease,transform .7s ease; }
-    .reveal.vis { opacity:1; transform:translateY(0); }
-    .d1 { transition-delay:.1s; }
-    .d2 { transition-delay:.2s; }
-    .d3 { transition-delay:.3s; }
-    .d4 { transition-delay:.4s; }
+  /* Turismo highlight in eventos section */
+  .turismo-highlight {
+    position:relative; border-radius:var(--r-lg); overflow:hidden; min-height:380px;
+    display:flex; align-items:flex-end;
+  }
+  .th-bg { position:absolute; inset:0; background-size:cover; background-position:center; }
+  .th-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,50,20,.92) 0%,rgba(0,50,20,.3) 55%,transparent 100%); }
+  .th-body { position:relative; z-index:2; padding:2rem; }
+  .th-body .tag { margin-bottom:.75rem; background:var(--verde); color:#fff; }
+  .th-body h3 { font-family:'Playfair Display',serif; font-size:1.5rem; color:#fff; margin-bottom:.5rem; }
+  .th-body p  { font-size:.88rem; color:rgba(255,255,255,.8); line-height:1.65; margin-bottom:1rem; }
 
-    /* ================================================
-       RESPONSIVE
-    ================================================ */
-    @media (max-width:1024px) {
-      .hero-inner   { grid-template-columns:1fr; text-align:center; }
-      .hero-sub     { max-width:100%; }
-      .hero-ctas    { justify-content:center; }
-      .hero-stats   { grid-template-columns:repeat(4,1fr); }
-      .acc-grid     { grid-template-columns:repeat(3,1fr); }
-      .not-grid     { grid-template-columns:1fr 1fr; }
-      .tur-grid     { grid-template-columns:1fr 1fr; }
-      .gob-grid     { grid-template-columns:repeat(2,1fr); }
-      .ciudad-inner { grid-template-columns:1fr; }
-      .con-inner    { grid-template-columns:1fr; }
-      .ft-inner     { grid-template-columns:1fr 1fr; }
-    }
-    @media (max-width:768px) {
-      .nav-list     { display:none; }
-      .hamburger    { display:flex; }
-      .hero-stats   { grid-template-columns:1fr 1fr; }
-      .acc-grid     { grid-template-columns:repeat(2,1fr); }
-      .not-grid     { grid-template-columns:1fr; }
-      .tur-grid     { grid-template-columns:1fr; }
-      .not-hd       { flex-direction:column; align-items:flex-start; }
-      .ft-inner     { grid-template-columns:1fr; }
-      .form-row     { grid-template-columns:1fr; }
-      .hero-inner   { padding-top:6rem; }
-    }
-    @media (max-width:480px) {
-      .acc-grid    { grid-template-columns:repeat(2,1fr); }
-      .datos-grid  { grid-template-columns:1fr; }
-      .gob-grid    { grid-template-columns:1fr 1fr; }
-    }
+  /* =====================================================
+     MEDIA CENTER
+  ===================================================== */
+  #media { background:var(--negro); padding:5rem 0; }
+  .media-header { text-align:center; margin-bottom:2.5rem; }
+  .media-header .section-title { color:#fff; }
+  .media-header .section-desc  { color:rgba(255,255,255,.6); margin:0 auto; }
+  .media-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:200px 200px;
+    gap:.8rem;
+  }
+  .media-item {
+    position:relative; overflow:hidden; border-radius:var(--r); cursor:pointer;
+    transition:transform .3s;
+  }
+  .media-item:hover { transform:scale(1.02); }
+  .media-item:first-child  { grid-column:span 2; grid-row:span 2; }
+  .media-item:nth-child(4) { grid-column:span 2; }
+  .media-img {
+    position:absolute; inset:0; background-size:cover; background-position:center;
+    transition:transform .5s ease;
+  }
+  .media-item:hover .media-img { transform:scale(1.06); }
+  .media-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 50%);
+    opacity:0; transition:opacity .3s;
+  }
+  .media-item:hover .media-overlay { opacity:1; }
+  .media-ico {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    color:#fff; font-size:1.5rem; opacity:0; transition:opacity .3s;
+  }
+  .media-item:hover .media-ico { opacity:1; }
+
+  /* =====================================================
+     GOBIERNO / INTENDENTE
+  ===================================================== */
+  #gobierno { background:var(--gris-f); }
+  .gob-layout { display:grid; grid-template-columns:340px 1fr; gap:5rem; align-items:center; }
+  .gob-foto-wrap {
+    position:relative;
+  }
+  .gob-foto {
+    width:100%; aspect-ratio:3/4; border-radius:var(--r-lg);
+    overflow:hidden; box-shadow:var(--shadow-l);
+  }
+  .gob-foto img { width:100%; height:100%; object-fit:cover; object-position:top; }
+  .gob-foto-badge {
+    position:absolute; bottom:-1rem; right:-1rem;
+    background:var(--azul); color:#fff;
+    border-radius:var(--r); padding:1rem 1.25rem;
+    box-shadow:var(--shadow-m); text-align:center;
+  }
+  .gob-foto-badge strong { display:block; font-size:1.4rem; }
+  .gob-foto-badge span   { font-size:.72rem; opacity:.85; }
+  .gob-info .section-kicker { display:block; margin-bottom:.5rem; }
+  .gob-info .section-title { margin-bottom:.75rem; }
+  .gob-cargo { font-size:.8rem; font-weight:800; color:var(--azul); letter-spacing:.08em; text-transform:uppercase; margin-bottom:1.2rem; }
+  .gob-bio   { font-size:.96rem; color:var(--gris-osc); line-height:1.8; margin-bottom:2rem; }
+  .gob-ejes  { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; }
+  .gob-eje {
+    display:flex; gap:.75rem; align-items:flex-start;
+    padding:1rem; background:#fff; border-radius:var(--r);
+    border-left:3px solid var(--azul);
+  }
+  .gob-eje-ico { color:var(--azul); font-size:1.1rem; margin-top:.1rem; flex-shrink:0; }
+  .gob-eje h4  { font-size:.88rem; font-weight:800; color:var(--negro); margin-bottom:.2rem; }
+  .gob-eje p   { font-size:.78rem; color:var(--gris-m); line-height:1.5; }
+  .gob-team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem; }
+  .gob-member {
+    background:#fff; border-radius:var(--r); padding:1.1rem; text-align:center;
+    border:1.5px solid var(--gris-l); transition:all .25s;
+  }
+  .gob-member:hover { border-color:var(--azul); box-shadow:var(--shadow-s); }
+  .gob-member-foto {
+    width:64px; height:64px; border-radius:50%; margin:0 auto .7rem;
+    overflow:hidden; background:var(--gris-f);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; color:var(--gris-m);
+  }
+  .gob-member-cargo { font-size:.65rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--azul); margin-bottom:.2rem; }
+  .gob-member-nombre { font-size:.88rem; font-weight:800; color:var(--negro); }
+
+  /* =====================================================
+     TRANSPARENCIA STRIP
+  ===================================================== */
+  .transp-strip { background:var(--azul-claro); border-top:1px solid var(--gris-l); border-bottom:1px solid var(--gris-l); }
+  .transp-inner {
+    display:flex; align-items:center; justify-content:space-between;
+    gap:2rem; padding:2rem 0; flex-wrap:wrap;
+  }
+  .transp-inner h3 { font-size:1.1rem; font-weight:800; color:var(--azul-osc); }
+  .transp-inner p  { font-size:.88rem; color:var(--gris-osc); margin-top:.25rem; }
+  .transp-btns { display:flex; gap:.75rem; flex-wrap:wrap; }
+
+  /* =====================================================
+     CONTACTO RÁPIDO
+  ===================================================== */
+  #contacto { background:#fff; }
+  .con-layout { display:grid; grid-template-columns:1fr 1.1fr; gap:5rem; align-items:start; }
+
+  .con-info .section-title { margin-bottom:1.1rem; }
+  .con-dato { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1.1rem; }
+  .con-ico {
+    width:44px; height:44px; border-radius:10px; flex-shrink:0;
+    background:var(--azul-claro); color:var(--azul);
+    display:flex; align-items:center; justify-content:center; font-size:1rem;
+  }
+  .con-txt strong { display:block; font-size:.78rem; color:var(--gris-m); font-weight:700; margin-bottom:.12rem; }
+  .con-txt span   { font-size:.92rem; color:var(--negro); font-weight:600; }
+  .redes-wrap { margin-top:1.5rem; }
+  .redes-wrap h4 { font-size:.8rem; font-weight:800; color:var(--gris-osc); letter-spacing:.08em; text-transform:uppercase; margin-bottom:.75rem; }
+  .redes { display:flex; gap:.6rem; }
+  .red {
+    width:38px; height:38px; border-radius:8px;
+    background:var(--gris-f); color:var(--gris-osc);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.95rem; transition:all .2s; cursor:pointer;
+  }
+  .red:hover { background:var(--azul); color:#fff; transform:translateY(-2px); }
+
+  /* Form */
+  .form-card { background:var(--gris-f); border-radius:var(--r-lg); padding:2.25rem; border:1.5px solid var(--gris-l); }
+  .form-card h3 { font-size:1.2rem; font-weight:800; color:var(--negro); margin-bottom:1.5rem; }
+  .fg { margin-bottom:1rem; }
+  .fg label { display:block; font-size:.78rem; font-weight:700; color:var(--gris-osc); margin-bottom:.4rem; }
+  .fg input, .fg select, .fg textarea {
+    width:100%; padding:.72rem .95rem;
+    border:1.5px solid var(--gris-l); border-radius:8px;
+    font-family:'Nunito Sans',sans-serif; font-size:.9rem;
+    color:var(--negro); background:#fff; outline:none; transition:all .2s;
+  }
+  .fg input:focus, .fg select:focus, .fg textarea:focus {
+    border-color:var(--azul); box-shadow:0 0 0 3px rgba(0,102,204,.1);
+  }
+  .fg textarea { resize:vertical; min-height:110px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .form-ok { display:none; text-align:center; padding:2.5rem; }
+  .form-ok i { font-size:2.5rem; color:var(--verde); display:block; margin-bottom:.75rem; }
+
+  /* =====================================================
+     FOOTER
+  ===================================================== */
+  #footer { background:#0A1628; color:rgba(255,255,255,.65); padding:4rem 0 0; }
+  .ft-top {
+    display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:3rem;
+    padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.07);
+  }
+  .ft-brand h3 {
+    font-family:'Playfair Display',serif; font-size:1.15rem;
+    color:#fff; margin:1rem 0 .6rem;
+  }
+  .ft-brand p { font-size:.85rem; line-height:1.75; margin-bottom:1.4rem; }
+  .ft-col h4 {
+    font-size:.7rem; font-weight:800; letter-spacing:.14em;
+    text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:1.1rem;
+  }
+  .ft-links { display:flex; flex-direction:column; gap:.52rem; }
+  .ft-links a { font-size:.86rem; color:rgba(255,255,255,.65); transition:all .18s; }
+  .ft-links a:hover { color:#fff; padding-left:.3rem; }
+  .ft-bottom {
+    display:flex; align-items:center; justify-content:space-between;
+    gap:1rem; flex-wrap:wrap; padding:1.4rem 0;
+  }
+  .ft-bottom p { font-size:.77rem; }
+  .ft-bl { display:flex; gap:1.25rem; }
+  .ft-bl a { font-size:.77rem; color:rgba(255,255,255,.4); transition:color .18s; }
+  .ft-bl a:hover { color:rgba(255,255,255,.8); }
+
+  /* =====================================================
+     ANIMACIONES
+  ===================================================== */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(28px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes bounce {
+    0%,100% { transform:translateX(-50%) translateY(0); }
+    50%      { transform:translateX(-50%) translateY(8px); }
+  }
+  .reveal { opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; }
+  .reveal.vis { opacity:1; transform:translateY(0); }
+  .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
+
+  /* =====================================================
+     RESPONSIVE
+  ===================================================== */
+  @media(max-width:1100px){
+    .srv-grid  { grid-template-columns:repeat(2,1fr); }
+    .proy-grid { grid-template-columns:repeat(2,1fr); }
+    .not-grid  { grid-template-columns:repeat(2,1fr); }
+    .gob-layout { grid-template-columns:1fr; }
+    .gob-foto-wrap { max-width:320px; }
+    .ft-top { grid-template-columns:1fr 1fr; }
+    .evt-layout { grid-template-columns:1fr; }
+    .hero-body { grid-template-columns:1fr; text-align:center; }
+    .hero-sub { max-width:100%; }
+    .hero-btns { justify-content:center; }
+    .hero-cards { grid-template-columns:repeat(4,1fr); }
+    .media-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(3,180px); }
+    .media-item:first-child { grid-column:span 1; grid-row:span 1; }
+    .media-item:nth-child(4) { grid-column:span 1; }
+  }
+  @media(max-width:768px){
+    .main-nav,.hd-cta { display:none; }
+    .hbg { display:flex; }
+    .acc-wrap { grid-template-columns:repeat(3,1fr); }
+    .srv-grid { grid-template-columns:1fr 1fr; }
+    .proy-grid,.not-grid { grid-template-columns:1fr; }
+    .hero-cards { grid-template-columns:1fr 1fr; }
+    .gob-ejes { grid-template-columns:1fr; }
+    .gob-team-grid { grid-template-columns:1fr 1fr; }
+    .con-layout { grid-template-columns:1fr; }
+    .ft-top { grid-template-columns:1fr; gap:2rem; }
+    .form-row { grid-template-columns:1fr; }
+    .hero-body { padding-top:7rem; }
+    .media-grid { grid-template-columns:1fr 1fr; grid-template-rows:repeat(3,150px); }
+    .transp-inner { flex-direction:column; align-items:flex-start; }
+  }
+  @media(max-width:540px){
+    .acc-wrap { grid-template-columns:repeat(2,1fr); }
+    .srv-grid { grid-template-columns:1fr; }
+    .hero-cards { grid-template-columns:1fr 1fr; }
+    .gob-team-grid { grid-template-columns:1fr; }
+  }
   </style>
 </head>
 <body>
 
-<!-- ================================================
-     HEADER / NAVEGACIÓN
-================================================ -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 <header id="header">
-  <div class="hd-inner">
-    <a href="#inicio" class="logo-wrap">
-      <div class="logo-escudo"><i class="fa-solid fa-landmark"></i></div>
-      <div class="logo-txt">
-        <span class="sup">Municipalidad de</span>
-        <span class="city">Las Lomitas</span>
-        <span class="prov">Dpto. Patiño · Formosa, Argentina</span>
+  <div class="container">
+    <div class="hd-wrap">
+      <a href="#inicio" class="logo">
+        <div class="logo-mark"><i class="fa-solid fa-landmark"></i></div>
+        <div class="logo-info">
+          <div class="logo-pre">Municipalidad de</div>
+          <div class="logo-name">Las Lomitas</div>
+          <div class="logo-sub">Dpto. Patiño · Formosa, Argentina</div>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#inicio" class="active">Inicio</a></li>
+          <li><a href="#gobierno">Municipalidad</a></li>
+          <li><a href="#servicios-dest">Servicios</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#eventos">Participación</a></li>
+          <li><a href="#footer">Transparencia</a></li>
+          <li><a href="#noticias">Noticias</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="hd-cta">
+        <a href="#contacto" class="btn btn-outline btn-sm">Reclamos</a>
+        <button class="btn-ciudadano"><i class="fa-solid fa-user"></i> Portal Ciudadano</button>
       </div>
-    </a>
 
-    <nav aria-label="Menú principal">
-      <ul class="nav-list">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#gobierno">Gobierno de Pablo Basualdo</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#noticias">Noticias</a></li>
-        <li><a href="#turismo">Turismo</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-        <li><a href="#servicios" class="nav-cta">Trámites Online</a></li>
-      </ul>
-    </nav>
-
-    <button class="hamburger" id="hbg" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </button>
+      <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
 
-<!-- Nav mobile overlay -->
-<nav class="nav-mobile" id="nav-mob">
-  <a href="#inicio"   onclick="closeMenu()">Inicio</a>
-  <a href="#gobierno" onclick="closeMenu()">Gobierno de Pablo Basualdo</a>
-  <a href="#servicios" onclick="closeMenu()">Servicios</a>
-  <a href="#noticias" onclick="closeMenu()">Noticias</a>
-  <a href="#turismo"  onclick="closeMenu()">Turismo</a>
-  <a href="#contacto" onclick="closeMenu()">Contacto</a>
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mob-nav">
+  <a href="#inicio"       onclick="cm()">Inicio</a>
+  <a href="#gobierno"     onclick="cm()">Municipalidad</a>
+  <a href="#servicios-dest" onclick="cm()">Servicios</a>
+  <a href="#proyectos"    onclick="cm()">Proyectos</a>
+  <a href="#eventos"      onclick="cm()">Participación</a>
+  <a href="#noticias"     onclick="cm()">Noticias</a>
+  <a href="#contacto"     onclick="cm()">Contacto</a>
 </nav>
 
-<!-- ================================================
-     HERO PRINCIPAL
-================================================ -->
+<!-- =====================================================
+     HERO — WebGL Animated Shader (ported from React)
+===================================================== -->
 <section id="inicio">
-  <div class="hero-bg"></div>
-  <div class="hero-pat"></div>
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
 
-  <div class="hero-inner">
-    <!-- Contenido izquierdo -->
-    <div class="hero-cont">
-      <div class="hero-badge">
-        <i class="fa-solid fa-sun"></i>
-        Capital Nacional del Horno &middot; Formosa
+  <div class="hero-body">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <i class="fa-solid fa-droplet" style="color:#67E8F9"></i>
+        Capital Nacional del Horno &middot; Bañado La Estrella
       </div>
       <h1 class="hero-h1">
-        Donde el agua<br>
-        <em>nombra</em> la tierra
+        Donde el agua<br><em>nombra</em> la tierra
       </h1>
       <p class="hero-sub">
-        Las Lomitas guarda en su corazón uno de los humedales más extraordinarios de América: el Bañado La Estrella. Un lugar donde la naturaleza no es paisaje de fondo, sino protagonista.
+        Las Lomitas guarda en su corazón uno de los humedales más extraordinarios de América. Un lugar donde la naturaleza no es paisaje de fondo, sino protagonista.
       </p>
-      <div class="hero-ctas">
-        <a href="#turismo"   class="btn btn-prim"><i class="fa-solid fa-compass"></i> Conocé Las Lomitas</a>
-        <a href="#servicios" class="btn btn-sec"><i class="fa-solid fa-file-lines"></i> Accedé a tus trámites</a>
+      <div class="hero-btns">
+        <a href="#servicios-dest" class="btn btn-white btn-lg"><i class="fa-solid fa-bolt"></i> Servicios Online</a>
+        <a href="#turismo-link"   class="btn btn-ghost btn-lg"><i class="fa-solid fa-compass"></i> Conocé Las Lomitas</a>
       </div>
     </div>
 
-    <!-- Stats glassmorphism -->
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="stat-num">1914</div>
-        <div class="stat-lbl">Año de fundación</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">12.4k</div>
-        <div class="stat-lbl">Habitantes</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">48°C</div>
-        <div class="stat-lbl">Temperatura récord</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">500 km</div>
-        <div class="stat-lbl">De Formosa capital</div>
+    <div class="hero-right">
+      <div class="hero-cards">
+        <div class="hero-card">
+          <div class="hero-card-ico">🏛️</div>
+          <div class="hero-card-num">1914</div>
+          <div class="hero-card-lbl">Año de fundación</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-ico">👥</div>
+          <div class="hero-card-num">12.4k</div>
+          <div class="hero-card-lbl">Habitantes</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-ico">🌡️</div>
+          <div class="hero-card-num">48°C</div>
+          <div class="hero-card-lbl">Temperatura récord</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-ico">💧</div>
+          <div class="hero-card-num">7ª</div>
+          <div class="hero-card-lbl">Maravilla Natural Argentina</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="scroll-ind">
-    Explorá<i class="fa-solid fa-chevron-down"></i>
-  </div>
+  <div class="scroll-ind">Explorá <i class="fa-solid fa-chevron-down"></i></div>
 </section>
 
-<!-- ================================================
-     ACCESOS RÁPIDOS
-================================================ -->
+<!-- =====================================================
+     ACCESOS RÁPIDOS (barra azul)
+===================================================== -->
 <section id="servicios">
-  <div class="acc-inner">
-    <p class="acc-ttl">Accesos rápidos &middot; Servicios municipales</p>
-    <div class="acc-grid">
-
+  <div class="container">
+    <div class="acc-wrap">
       <a href="#" class="acc-item">
-        <div class="acc-ico" style="background:rgba(64,145,108,.15);color:#95D5B2;">
-          <i class="fa-solid fa-file-signature"></i>
-        </div>
-        <span class="acc-lbl">Trámites Online</span>
+        <div class="acc-ico"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+        <span class="acc-lbl">Impuestos y Tasas</span>
       </a>
-
       <a href="#" class="acc-item">
-        <div class="acc-ico" style="background:rgba(200,135,58,.15);color:#D4AF37;">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-        </div>
-        <span class="acc-lbl">Reclamos y Denuncias</span>
+        <div class="acc-ico"><i class="fa-solid fa-id-card"></i></div>
+        <span class="acc-lbl">Documentos</span>
       </a>
-
       <a href="#" class="acc-item">
-        <div class="acc-ico" style="background:rgba(149,213,178,.12);color:#95D5B2;">
-          <i class="fa-solid fa-calendar-check"></i>
-        </div>
+        <div class="acc-ico"><i class="fa-solid fa-calendar-check"></i></div>
         <span class="acc-lbl">Sacar Turno</span>
       </a>
-
       <a href="#" class="acc-item">
-        <div class="acc-ico" style="background:rgba(212,175,55,.15);color:#D4AF37;">
-          <i class="fa-solid fa-scale-balanced"></i>
-        </div>
+        <div class="acc-ico"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <span class="acc-lbl">Reclamos</span>
+      </a>
+      <a href="#" class="acc-item">
+        <div class="acc-ico"><i class="fa-solid fa-scale-balanced"></i></div>
         <span class="acc-lbl">Transparencia</span>
       </a>
-
       <a href="#" class="acc-item">
-        <div class="acc-ico" style="background:rgba(64,145,108,.15);color:#95D5B2;">
-          <i class="fa-solid fa-store"></i>
-        </div>
-        <span class="acc-lbl">Habilitaciones Comerciales</span>
-      </a>
-
-      <a href="#" class="acc-item">
-        <div class="acc-ico" style="background:rgba(200,135,58,.15);color:#C8873A;">
-          <i class="fa-solid fa-building-columns"></i>
-        </div>
+        <div class="acc-ico"><i class="fa-solid fa-building-columns"></i></div>
         <span class="acc-lbl">AFIP / ANSES</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SERVICIOS DESTACADOS
+===================================================== -->
+<section id="servicios-dest" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-kicker">Servicios municipales</span>
+      <h2 class="section-title">Accedé a tus <span>trámites</span></h2>
+      <div class="accent-line"></div>
+      <p class="section-desc">Todos los servicios municipales en un solo lugar. Rápido, simple y accesible para todos los vecinos y vecinas.</p>
+    </div>
+    <div class="srv-grid">
+
+      <div class="srv-card reveal">
+        <div class="srv-ico-wrap" style="background:#EBF3FF;color:#0066CC;"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+        <div class="srv-title">Impuestos y Tasas Municipales</div>
+        <div class="srv-desc">Consultá y pagá tu tasa de alumbrado, barrido y limpieza. Verificá el estado de tu cuenta corriente municipal.</div>
+        <div class="srv-arrow"><i class="fa-solid fa-arrow-right"></i> Ver servicio</div>
+      </div>
+
+      <div class="srv-card reveal d1">
+        <div class="srv-ico-wrap" style="background:#EBF7F2;color:#2D8659;"><i class="fa-solid fa-id-card"></i></div>
+        <div class="srv-title">Documentos y Habilitaciones</div>
+        <div class="srv-desc">Trámites de habilitación comercial, certificados de buena conducta y documentación oficial municipal.</div>
+        <div class="srv-arrow"><i class="fa-solid fa-arrow-right"></i> Ver servicio</div>
+      </div>
+
+      <div class="srv-card reveal d2">
+        <div class="srv-ico-wrap" style="background:#FBF4EC;color:#D4A574;"><i class="fa-solid fa-hard-hat"></i></div>
+        <div class="srv-title">Obras Públicas y Permisos</div>
+        <div class="srv-desc">Gestioná permisos de construcción, conexiones de servicios y solicitudes de obras de infraestructura.</div>
+        <div class="srv-arrow"><i class="fa-solid fa-arrow-right"></i> Ver servicio</div>
+      </div>
+
+      <div class="srv-card reveal d3">
+        <div class="srv-ico-wrap" style="background:#FEF2F2;color:#DC2626;"><i class="fa-solid fa-headset"></i></div>
+        <div class="srv-title">Reclamos y Denuncias</div>
+        <div class="srv-desc">Reportá inconvenientes en espacios públicos, baches, luminarias o problemas en tu barrio. Tu voz importa.</div>
+        <div class="srv-arrow"><i class="fa-solid fa-arrow-right"></i> Ver servicio</div>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- ================================================
-     NOTICIAS Y NOVEDADES
-================================================ -->
-<section id="noticias">
-  <div class="not-inner">
-    <div class="not-hd">
+<!-- =====================================================
+     PROYECTOS ESTRATÉGICOS
+===================================================== -->
+<section id="proyectos" class="section">
+  <div class="container">
+    <div class="section-header reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;">
       <div>
-        <p class="lbl">Actualidad municipal</p>
-        <h2 class="titulo-seccion">Noticias y Novedades</h2>
+        <span class="section-kicker">Gestión Basualdo 2023–2027</span>
+        <h2 class="section-title">Proyectos <span>Estratégicos</span></h2>
+        <div class="accent-line"></div>
       </div>
-      <a href="#" class="btn btn-prim" style="white-space:nowrap;">
-        Ver todas <i class="fa-solid fa-arrow-right"></i>
-      </a>
+      <a href="#" class="btn btn-outline">Ver todos los proyectos <i class="fa-solid fa-arrow-right"></i></a>
     </div>
+    <div class="proy-grid">
 
+      <div class="proy-card reveal">
+        <div class="proy-img">
+          <div class="proy-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vista-aerea-3-banos.jpg')"></div>
+          <div class="proy-img-overlay"></div>
+          <span class="proy-status">En ejecución</span>
+        </div>
+        <div class="proy-body">
+          <div class="proy-title">Corredor Turístico del Bañado La Estrella</div>
+          <div class="proy-desc">Desarrollo de infraestructura de acceso, señalización y servicios para potenciar el turismo sostenible en el humedal más importante de Argentina.</div>
+          <div class="proy-prog">
+            <div class="proy-prog-label"><span>Avance</span><span>65%</span></div>
+            <div class="proy-prog-bar"><div class="proy-prog-fill" style="width:65%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proy-card reveal d1">
+        <div class="proy-img">
+          <div class="proy-img-bg" style="background-image:url('https://www.formosahermosa.gob.ar/wp-content/uploads/2024/05/portada-banado-3.jpg')"></div>
+          <div class="proy-img-overlay"></div>
+          <span class="proy-status">En licitación</span>
+        </div>
+        <div class="proy-body">
+          <div class="proy-title">Plan de Pavimentación 2025</div>
+          <div class="proy-desc">Pavimentación de 14 km de calles céntricas y accesos a barrios periféricos. Mejoramiento de la conectividad urbana para más de 4.000 familias.</div>
+          <div class="proy-prog">
+            <div class="proy-prog-label"><span>Avance</span><span>30%</span></div>
+            <div class="proy-prog-bar"><div class="proy-prog-fill" style="width:30%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proy-card reveal d2">
+        <div class="proy-img">
+          <div class="proy-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/amanecer-en-los-banos.jpeg')"></div>
+          <div class="proy-img-overlay"></div>
+          <span class="proy-status">Proyectado</span>
+        </div>
+        <div class="proy-body">
+          <div class="proy-title">80 Viviendas Barrio La Esperanza</div>
+          <div class="proy-desc">Construcción de viviendas sociales en el barrio La Esperanza en convenio con el Ministerio de Vivienda de la Nación.</div>
+          <div class="proy-prog">
+            <div class="proy-prog-label"><span>Avance</span><span>10%</span></div>
+            <div class="proy-prog-bar"><div class="proy-prog-fill" style="width:10%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     NOTICIAS
+===================================================== -->
+<section id="noticias" class="section">
+  <div class="container">
+    <div class="section-header reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;">
+      <div>
+        <span class="section-kicker">Actualidad municipal</span>
+        <h2 class="section-title">Últimas <span>Noticias</span></h2>
+        <div class="accent-line"></div>
+      </div>
+      <a href="#" class="btn btn-outline">Ver todas las noticias <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
     <div class="not-grid">
 
-      <!-- Noticia destacada -->
       <article class="card-not reveal">
-        <div class="card-not-img">
-          <div class="card-not-img-bg" style="background:url('https://www.diariopinion.com.ar/content/bucket/6/9446w850h567c.jpg.webp') center/cover no-repeat;"></div>
-          <span class="card-tag">Destacado</span>
+        <div class="card-img">
+          <div class="card-img-bg" style="background-image:url('https://www.diariopinion.com.ar/content/bucket/6/9446w850h567c.jpg.webp')"></div>
         </div>
         <div class="card-body">
-          <p class="card-fecha"><i class="fa-regular fa-calendar" style="margin-right:5px;"></i>15 de abril de 2025</p>
-          <h3>Pablo Basualdo presentó el Plan de Obras 2025: pavimentación, agua potable y viviendas para Las Lomitas</h3>
-          <p>El intendente anunció un ambicioso programa de infraestructura que incluye la pavimentación de calles céntricas, ampliación de la red de agua potable y la construcción de 80 viviendas en el barrio La Esperanza.</p>
-          <a href="#" class="card-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="card-meta">
+            <span class="tag tag-azul">Obras Públicas</span>
+            <span class="card-fecha">15 abr. 2025</span>
+          </div>
+          <h3>Basualdo presentó el Plan de Obras 2025: pavimentación, agua y viviendas</h3>
+          <p>El intendente anunció un ambicioso programa de infraestructura que incluye 14 km de pavimento, ampliación de la red de agua y 80 viviendas sociales.</p>
+          <a href="#" class="card-link">Leer nota completa <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </article>
 
-      <!-- Noticia 2 -->
       <article class="card-not reveal d1">
-        <div class="card-not-img">
-          <div class="card-not-img-bg" style="background:url('https://laderasur.com/wp-content/uploads/2024/10/vista-de-agua-banos-de-la-estrella.jpg') center/cover no-repeat;"></div>
-          <span class="card-tag">Turismo</span>
+        <div class="card-img">
+          <div class="card-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vista-de-agua-banos-de-la-estrella.jpg')"></div>
         </div>
         <div class="card-body">
-          <p class="card-fecha"><i class="fa-regular fa-calendar" style="margin-right:5px;"></i>28 de marzo de 2025</p>
-          <h3>Nuevo acceso al Bañado La Estrella listo para la temporada</h3>
-          <p>La municipalidad habilitó el camino de acceso al humedal en colaboración con el gobierno provincial, justo a tiempo para la temporada de pesca y avistamiento de fauna.</p>
-          <a href="#" class="card-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="card-meta">
+            <span class="tag tag-verde">Turismo</span>
+            <span class="card-fecha">28 mar. 2025</span>
+          </div>
+          <h3>Nuevo acceso al Bañado La Estrella listo para la temporada de pesca</h3>
+          <p>La municipalidad habilitó el camino de acceso al humedal en colaboración con el gobierno provincial.</p>
+          <a href="#" class="card-link">Leer nota completa <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </article>
 
-      <!-- Noticia 3 -->
       <article class="card-not reveal d2">
-        <div class="card-not-img">
-          <div class="card-not-img-bg" style="background:url('https://laderasur.com/wp-content/uploads/2024/10/fauna-banos-arg.jpg') center/cover no-repeat;"></div>
-          <span class="card-tag">Salud</span>
+        <div class="card-img">
+          <div class="card-img-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/fauna-banos-arg.jpg')"></div>
         </div>
         <div class="card-body">
-          <p class="card-fecha"><i class="fa-regular fa-calendar" style="margin-right:5px;"></i>10 de marzo de 2025</p>
-          <h3>Operativo sanitario gratuito en los barrios: vacunación y control pediátrico</h3>
-          <p>El área de Salud municipal y el Ministerio provincial desplegaron un operativo integral en cinco barrios, atendiendo a más de 600 vecinos.</p>
-          <a href="#" class="card-link">Leer más <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="card-meta">
+            <span class="tag tag-ocre">Salud</span>
+            <span class="card-fecha">10 mar. 2025</span>
+          </div>
+          <h3>Operativo sanitario gratuito: vacunación y pediatría en los barrios</h3>
+          <p>El área de Salud municipal desplegó un operativo integral en cinco barrios, atendiendo a más de 600 vecinos.</p>
+          <a href="#" class="card-link">Leer nota completa <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </article>
 
@@ -780,466 +933,557 @@
   </div>
 </section>
 
-<!-- ================================================
-     BANNER PABLO BASUALDO
-================================================ -->
-<section class="intendente-banner">
-  <div class="intendente-foto-bg" style="background-image:url('https://agenfor.com.ar/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-20-at-12.19.57-PM-750x338.jpeg');"></div>
-  <div class="intendente-velo"></div>
-  <div class="intendente-cnt reveal">
-    <blockquote>
-      "Las Lomitas tiene todo para crecer. Tenemos naturaleza, tenemos gente, tenemos ganas. Esta gestión trabaja cada día para convertir ese potencial en realidad."
-    </blockquote>
-    <cite>
-      Pablo Basualdo
-      <span class="cargo-cita">Intendente Municipal de Las Lomitas · Departamento Patiño, Formosa</span>
-    </cite>
-  </div>
-</section>
-
-<!-- ================================================
-     NUESTRA CIUDAD
-================================================ -->
-<section id="ciudad">
-  <div class="ciudad-deco"></div>
-  <div class="ciudad-inner">
-
-    <div>
-      <p class="lbl">Identidad local</p>
-      <h2 class="titulo-seccion">Nuestra Ciudad</h2>
-      <p class="desc-seccion">
-        Las Lomitas nació de la voluntad de los pueblos originarios y los primeros colonos que supieron prosperar bajo un sol implacable. Hoy, con orgullo y trabajo, seguimos escribiendo nuestra historia.
-      </p>
-      <br>
-      <p class="desc-seccion" style="font-size:.94rem;">
-        Ciudad cabecera del departamento Patiño, a pocos kilómetros del Bañado La Estrella —una de las reservas de agua dulce más grandes de América del Sur— Las Lomitas combina la identidad chaqueña con la apertura al futuro.
-      </p>
-    </div>
-
-    <div class="datos-grid">
-      <div class="dato-card reveal">
-        <div class="dato-ico">🏛️</div>
-        <div class="dato-num">1914</div>
-        <div class="dato-lbl">Año de fundación</div>
+<!-- =====================================================
+     TRANSPARENCIA STRIP
+===================================================== -->
+<div class="transp-strip">
+  <div class="container">
+    <div class="transp-inner">
+      <div>
+        <h3>Gestión Transparente</h3>
+        <p>Accedé al presupuesto municipal, licitaciones, declaraciones juradas y toda la información pública.</p>
       </div>
-      <div class="dato-card reveal d1">
-        <div class="dato-ico">👥</div>
-        <div class="dato-num">~12.400</div>
-        <div class="dato-lbl">Habitantes</div>
+      <div class="transp-btns">
+        <a href="#" class="btn btn-azul btn-sm"><i class="fa-solid fa-file-contract"></i> Presupuesto 2025</a>
+        <a href="#" class="btn btn-outline btn-sm"><i class="fa-solid fa-gavel"></i> Ordenanzas</a>
+        <a href="#" class="btn btn-outline btn-sm"><i class="fa-solid fa-folder-open"></i> Licitaciones</a>
       </div>
-      <div class="dato-card reveal d2">
-        <div class="dato-ico">🌡️</div>
-        <div class="dato-num">48°C</div>
-        <div class="dato-lbl">Temperatura récord histórica</div>
-      </div>
-      <div class="dato-card reveal d3">
-        <div class="dato-ico">📍</div>
-        <div class="dato-num">500 km</div>
-        <div class="dato-lbl">De Formosa capital</div>
-      </div>
-      <div class="dato-card reveal">
-        <div class="dato-ico">🗺️</div>
-        <div class="dato-num">Patiño</div>
-        <div class="dato-lbl">Departamento al que pertenece</div>
-      </div>
-      <div class="dato-card reveal d1">
-        <div class="dato-ico">💧</div>
-        <div class="dato-num">Bañado</div>
-        <div class="dato-lbl">La Estrella, maravilla natural</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================================================
-     BANNER BAÑADO LA ESTRELLA
-================================================ -->
-<div class="foto-banner">
-  <div class="foto-banner-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/banos-de-la-estrella-puesta.jpg');"></div>
-  <div class="foto-banner-velo" style="background:linear-gradient(to right,rgba(27,67,50,.82) 0%,rgba(27,67,50,.5) 50%,rgba(200,135,58,.45) 100%);">
-    <div class="foto-banner-txt">
-      <blockquote>"El agua no tiene prisa, pero llega siempre."</blockquote>
-      <cite>Bañado La Estrella · Una de las 7 Maravillas Naturales de Argentina</cite>
     </div>
   </div>
 </div>
 
-<!-- ================================================
-     TURISMO
-================================================ -->
-<section id="turismo">
-  <div class="tur-pat"></div>
-  <div class="tur-inner">
-
-    <div class="tur-hd reveal">
-      <p class="lbl" style="color:var(--dorado);">Destino Formosa</p>
-      <h2 class="titulo-seccion">Turismo y Naturaleza</h2>
-      <p class="desc-seccion">
-        A pocos kilómetros de la ciudad, el Bañado La Estrella despliega uno de los espectáculos naturales más extraordinarios de Argentina. Fauna única, paisajes imposibles y una experiencia que no se olvida.
-      </p>
-    </div>
-
-    <div class="tur-grid">
-
-      <div class="tur-card reveal">
-        <div class="tur-img">
-          <div class="tur-img-bg" style="background:url('https://laderasur.com/wp-content/uploads/2024/10/amanecer-en-los-banos.jpeg') center/cover no-repeat;"></div>
-          <div class="tur-overlay"></div>
-          <div class="tur-cnt">
-            <span class="tur-tag">Maravilla Natural</span>
-            <h3>Bañado La Estrella</h3>
-            <p>El gran humedal del oeste formoseño. Un ecosistema único con cientos de especies de aves, yacarés, carpinchos y una biodiversidad extraordinaria. Uno de los mayores reservorios de agua dulce de Sudamérica.</p>
+<!-- =====================================================
+     EVENTOS + TURISMO
+===================================================== -->
+<section id="eventos" class="section">
+  <div class="container">
+    <div class="evt-layout">
+      <div>
+        <div class="section-header reveal" style="margin-bottom:2rem;">
+          <span class="section-kicker">Agenda ciudadana</span>
+          <h2 class="section-title">Próximos <span>Eventos</span></h2>
+          <div class="accent-line"></div>
+        </div>
+        <div class="evt-list">
+          <div class="evt-item reveal">
+            <div class="evt-date"><div class="evt-day">18</div><div class="evt-month">May</div></div>
+            <div class="evt-info">
+              <h4>Audiencia Pública — Presupuesto Participativo 2026</h4>
+              <p><i class="fa-solid fa-location-dot" style="color:var(--gris-m);margin-right:4px"></i> Salón Municipal · 9:00 hs</p>
+            </div>
+          </div>
+          <div class="evt-item reveal d1">
+            <div class="evt-date"><div class="evt-day">25</div><div class="evt-month">May</div></div>
+            <div class="evt-info">
+              <h4>Feria de Emprendedores Locales — Temporada 2025</h4>
+              <p><i class="fa-solid fa-location-dot" style="color:var(--gris-m);margin-right:4px"></i> Plaza Central · Todo el día</p>
+            </div>
+          </div>
+          <div class="evt-item reveal d2">
+            <div class="evt-date" style="background:var(--verde);"><div class="evt-day">07</div><div class="evt-month">Jun</div></div>
+            <div class="evt-info">
+              <h4>Apertura Temporada Ecoturismo — Bañado La Estrella</h4>
+              <p><i class="fa-solid fa-location-dot" style="color:var(--gris-m);margin-right:4px"></i> Fortín La Soledad · 7:00 hs</p>
+            </div>
+          </div>
+          <div class="evt-item reveal d3">
+            <div class="evt-date"><div class="evt-day">20</div><div class="evt-month">Jun</div></div>
+            <div class="evt-info">
+              <h4>Jornada de Salud Comunitaria — Barrio Norte</h4>
+              <p><i class="fa-solid fa-location-dot" style="color:var(--gris-m);margin-right:4px"></i> Centro de Salud Nº 3 · 8:00–13:00 hs</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="tur-card reveal d1">
-        <div class="tur-img">
-          <div class="tur-img-bg" style="background:url('https://laderasur.com/wp-content/uploads/2024/10/atardecer-banos-de-la-estrella.jpeg') center/cover no-repeat;"></div>
-          <div class="tur-overlay"></div>
-          <div class="tur-cnt">
-            <span class="tur-tag">Gastronomía</span>
-            <h3>Sabores del Chaco</h3>
-            <p>Locro formoseño, asado criollo y chicharrón. La cocina regional que nació de la fusión de culturas originarias y criollas.</p>
-          </div>
+      <!-- Turismo highlight -->
+      <div id="turismo-link" class="turismo-highlight reveal">
+        <div class="th-bg" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/banos-de-la-estrella-puesta.jpg')"></div>
+        <div class="th-overlay"></div>
+        <div class="th-body">
+          <span class="tag" style="background:var(--verde);color:#fff;">Destino Natural</span>
+          <h3>Bañado La Estrella</h3>
+          <p>Una de las 7 Maravillas Naturales de Argentina. El segundo humedal más grande del país, a 65 km de Las Lomitas. Aves, yacarés, carpinchos y atardeceres que no tienen igual en el mundo.</p>
+          <a href="#contacto" class="btn btn-white btn-sm"><i class="fa-solid fa-map-location-dot"></i> Planificá tu visita</a>
         </div>
       </div>
-
-      <div class="tur-card reveal d2">
-        <div class="tur-img">
-          <div class="tur-img-bg" style="background:url('https://laderasur.com/wp-content/uploads/2024/10/vegetacion-bano-de-las-estrellas.jpeg') center/cover no-repeat;"></div>
-          <div class="tur-overlay"></div>
-          <div class="tur-cnt">
-            <span class="tur-tag">Cultura</span>
-            <h3>Pueblos Originarios</h3>
-            <p>La presencia de comunidades Qom, Pilagá y Wichí enriquece la identidad de Las Lomitas con una herencia cultural viva y vibrante.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="text-align:center;margin-top:3rem;">
-      <a href="#contacto" class="btn btn-ocre">
-        <i class="fa-solid fa-map-location-dot"></i>
-        Planificá tu visita
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================================================
-     AUTORIDADES MUNICIPALES
-================================================ -->
-<section id="gobierno">
-  <div class="gob-inner">
-    <div class="gob-hd reveal">
-      <p class="lbl">Gestión municipal</p>
-      <h2 class="titulo-seccion">Gobierno de Pablo Basualdo</h2>
-      <p style="color:var(--txt-med);max-width:520px;margin:0 auto;line-height:1.75;">
-        Un equipo comprometido con el desarrollo de Las Lomitas, trabajando cada día por el bienestar de todos los vecinos y vecinas.
-      </p>
-    </div>
-
-    <div class="gob-grid">
-
-      <!-- Intendente -->
-      <div class="aut-card reveal">
-        <div class="aut-foto">
-          <img src="https://www.diariopinion.com.ar/content/bucket/8/9338w720h720c.jpg.webp" alt="Pablo Basualdo, Intendente de Las Lomitas" style="width:100%;height:100%;object-fit:cover;object-position:top;">
-        </div>
-        <p class="aut-cargo">Intendente Municipal</p>
-        <h3 class="aut-nombre">Pablo Basualdo</h3>
-        <p class="aut-area">Jefe del Ejecutivo Municipal</p>
-      </div>
-
-      <div class="aut-card reveal d1">
-        <div class="aut-foto">
-          <div class="aut-foto-in" style="background:linear-gradient(135deg,var(--ocre),var(--dorado));">
-            <i class="fa-solid fa-user"></i>
-          </div>
-        </div>
-        <p class="aut-cargo">Secretaría de Gobierno</p>
-        <h3 class="aut-nombre">Autoridad Designada</h3>
-        <p class="aut-area">Gestión y Coordinación</p>
-      </div>
-
-      <div class="aut-card reveal d2">
-        <div class="aut-foto">
-          <div class="aut-foto-in" style="background:linear-gradient(135deg,#2D6A4F,#95D5B2);">
-            <i class="fa-solid fa-user"></i>
-          </div>
-        </div>
-        <p class="aut-cargo">Secretaría de Obras Públicas</p>
-        <h3 class="aut-nombre">Autoridad Designada</h3>
-        <p class="aut-area">Infraestructura y Servicios</p>
-      </div>
-
-      <div class="aut-card reveal d3">
-        <div class="aut-foto">
-          <div class="aut-foto-in" style="background:linear-gradient(135deg,#8B5E3C,var(--ocre));">
-            <i class="fa-solid fa-user"></i>
-          </div>
-        </div>
-        <p class="aut-cargo">Secretaría de Hacienda</p>
-        <h3 class="aut-nombre">Autoridad Designada</h3>
-        <p class="aut-area">Finanzas Municipales</p>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ================================================
-     CONTACTO
-================================================ -->
-<section id="contacto">
-  <div class="con-inner">
-
-    <div class="reveal">
-      <p class="lbl">Hablemos</p>
-      <h2 class="titulo-seccion" style="max-width:none;">Contacto Municipal</h2>
-      <p style="font-size:1rem;line-height:1.75;color:var(--txt-med);margin-bottom:2rem;">
-        Estamos para atenderte. Visitanos, llamanos o completá el formulario y un agente municipal se comunicará con vos a la brevedad.
-      </p>
-
-      <div class="con-dato">
-        <div class="con-ico"><i class="fa-solid fa-location-dot"></i></div>
-        <div class="con-dtxt">
-          <strong>Dirección</strong>
-          <span>Av. San Martín 100, Las Lomitas<br>Dpto. Patiño, Formosa (CP 3630)</span>
-        </div>
+<!-- =====================================================
+     MEDIA CENTER
+===================================================== -->
+<section id="media">
+  <div class="container">
+    <div class="media-header reveal">
+      <span class="section-kicker" style="color:rgba(255,255,255,.5);">Galería</span>
+      <h2 class="section-title">Centro de <span style="color:#67E8F9;">Medios</span></h2>
+      <p class="section-desc centered" style="color:rgba(255,255,255,.55);">Imágenes del Bañado La Estrella y de la vida institucional de Las Lomitas.</p>
+    </div>
+    <div class="media-grid">
+      <div class="media-item reveal">
+        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/amanecer-en-los-banos.jpeg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
       </div>
-      <div class="con-dato">
-        <div class="con-ico"><i class="fa-solid fa-phone"></i></div>
-        <div class="con-dtxt">
-          <strong>Teléfono</strong>
-          <span>(03718) 42-XXXX</span>
-        </div>
+      <div class="media-item reveal d1">
+        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vista-de-agua-banos-de-la-estrella.jpg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
       </div>
-      <div class="con-dato">
-        <div class="con-ico"><i class="fa-solid fa-envelope"></i></div>
-        <div class="con-dtxt">
-          <strong>Correo electrónico</strong>
-          <span>municipio@laslomitas.gob.ar</span>
-        </div>
+      <div class="media-item reveal d2">
+        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/fauna-banos-arg.jpg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
       </div>
-      <div class="con-dato">
-        <div class="con-ico"><i class="fa-solid fa-clock"></i></div>
-        <div class="con-dtxt">
-          <strong>Horario de atención</strong>
-          <span>Lunes a viernes: 7:30 – 13:30 hs</span>
-        </div>
+      <div class="media-item reveal d1">
+        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/vegetacion-bano-de-las-estrellas.jpeg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="media-item reveal d2">
+        <div class="media-img" style="background-image:url('https://www.formosahermosa.gob.ar/wp-content/uploads/2024/05/portada-banado-7.jpg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
+      </div>
+      <div class="media-item reveal d3">
+        <div class="media-img" style="background-image:url('https://laderasur.com/wp-content/uploads/2024/10/atardecer-banos-de-la-estrella.jpeg')"></div>
+        <div class="media-overlay"></div>
+        <div class="media-ico"><i class="fa-solid fa-expand"></i></div>
       </div>
     </div>
-
-    <!-- Formulario -->
-    <div class="form-wrap reveal d1">
-      <h3>Envianos tu consulta</h3>
-
-      <form id="form-con" novalidate>
-        <div class="form-row">
-          <div class="fg">
-            <label for="nombre">Nombre y apellido *</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Juan García" required>
-          </div>
-          <div class="fg">
-            <label for="dni">DNI</label>
-            <input type="text" id="dni" name="dni" placeholder="12.345.678">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="fg">
-            <label for="email">Email *</label>
-            <input type="email" id="email" name="email" placeholder="juan@email.com" required>
-          </div>
-          <div class="fg">
-            <label for="tel">Teléfono</label>
-            <input type="tel" id="tel" name="tel" placeholder="(03718) 4X-XXXX">
-          </div>
-        </div>
-        <div class="fg">
-          <label for="asunto">Tema de consulta *</label>
-          <select id="asunto" name="asunto" required>
-            <option value="">Seleccioná una opción...</option>
-            <option>Trámites y habilitaciones</option>
-            <option>Reclamos de servicios</option>
-            <option>Obras públicas</option>
-            <option>Turismo y eventos</option>
-            <option>Transparencia y documentos</option>
-            <option>Otro</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label for="msg">Mensaje *</label>
-          <textarea id="msg" name="msg" placeholder="Describí tu consulta o reclamo con el mayor detalle posible..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-prim" style="width:100%;justify-content:center;padding:1rem;">
-          <i class="fa-solid fa-paper-plane"></i> Enviar consulta
-        </button>
-      </form>
-
-      <div class="form-ok" id="form-ok">
-        <i class="fa-solid fa-circle-check"></i>
-        <h3 style="color:var(--v-oscuro);margin-bottom:.75rem;">¡Mensaje recibido!</h3>
-        <p style="color:var(--txt-med);">Gracias por comunicarte. Un agente municipal responderá en un plazo de 48 horas hábiles.</p>
-      </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="#" class="btn btn-ghost"><i class="fa-solid fa-images"></i> Ver galería completa</a>
     </div>
-
   </div>
 </section>
 
-<!-- ================================================
+<!-- =====================================================
+     GOBIERNO — Intendente Basualdo
+===================================================== -->
+<section id="gobierno" class="section-lg">
+  <div class="container">
+    <div class="gob-layout">
+      <div class="gob-foto-wrap reveal">
+        <div class="gob-foto">
+          <img src="https://www.diariopinion.com.ar/content/bucket/8/9338w720h720c.jpg.webp" alt="Pablo Basualdo, Intendente de Las Lomitas">
+        </div>
+        <div class="gob-foto-badge">
+          <strong>2023</strong>
+          <span>Intendente electo</span>
+        </div>
+      </div>
+
+      <div class="gob-info reveal d1">
+        <span class="section-kicker">Municipalidad de Las Lomitas</span>
+        <h2 class="section-title">Pablo <span>Basualdo</span></h2>
+        <div class="accent-line"></div>
+        <p class="gob-cargo">Intendente Municipal · Departamento Patiño, Formosa</p>
+        <p class="gob-bio">
+          Nacido en Las Lomitas, Pablo Basualdo asumió la intendencia con el compromiso de transformar la ciudad más calurosa del país en un ejemplo de gestión moderna, transparente y comprometida con su identidad natural y cultural. Su gobierno se centra en obras de infraestructura, turismo sostenible y participación ciudadana.
+        </p>
+
+        <div class="gob-ejes">
+          <div class="gob-eje">
+            <div class="gob-eje-ico"><i class="fa-solid fa-road"></i></div>
+            <div><h4>Infraestructura</h4><p>Pavimentación, agua potable y conectividad para todos los barrios.</p></div>
+          </div>
+          <div class="gob-eje">
+            <div class="gob-eje-ico"><i class="fa-solid fa-leaf"></i></div>
+            <div><h4>Turismo Sostenible</h4><p>Potenciar el Bañado La Estrella como motor económico local.</p></div>
+          </div>
+          <div class="gob-eje">
+            <div class="gob-eje-ico"><i class="fa-solid fa-users"></i></div>
+            <div><h4>Participación</h4><p>Presupuesto participativo y consultas ciudadanas abiertas.</p></div>
+          </div>
+          <div class="gob-eje">
+            <div class="gob-eje-ico"><i class="fa-solid fa-scale-balanced"></i></div>
+            <div><h4>Transparencia</h4><p>Gestión abierta, acceso a la información y rendición de cuentas.</p></div>
+          </div>
+        </div>
+
+        <a href="#contacto" class="btn btn-azul"><i class="fa-solid fa-calendar"></i> Solicitar audiencia</a>
+        &nbsp;
+        <a href="#" class="btn btn-outline"><i class="fa-solid fa-file-lines"></i> Agenda pública</a>
+
+        <div style="margin-top:2.5rem;">
+          <p style="font-size:.78rem;font-weight:800;color:var(--gris-m);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;">Gabinete Municipal</p>
+          <div class="gob-team-grid">
+            <div class="gob-member">
+              <div class="gob-member-foto"><i class="fa-solid fa-user"></i></div>
+              <div class="gob-member-cargo">Secretaría de Gobierno</div>
+              <div class="gob-member-nombre">Autoridad Designada</div>
+            </div>
+            <div class="gob-member">
+              <div class="gob-member-foto"><i class="fa-solid fa-user"></i></div>
+              <div class="gob-member-cargo">Obras Públicas</div>
+              <div class="gob-member-nombre">Autoridad Designada</div>
+            </div>
+            <div class="gob-member">
+              <div class="gob-member-foto"><i class="fa-solid fa-user"></i></div>
+              <div class="gob-member-cargo">Hacienda</div>
+              <div class="gob-member-nombre">Autoridad Designada</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     CONTACTO RÁPIDO
+===================================================== -->
+<section id="contacto" class="section">
+  <div class="container">
+    <div class="section-header centered reveal" style="margin-bottom:3.5rem;">
+      <span class="section-kicker">Hablemos</span>
+      <h2 class="section-title">Contacto <span>Municipal</span></h2>
+      <div class="accent-line" style="margin:0.85rem auto 0;"></div>
+      <p class="section-desc centered">Estamos para atenderte. Respondemos en 48 horas hábiles.</p>
+    </div>
+    <div class="con-layout">
+      <div class="reveal">
+        <div class="con-dato">
+          <div class="con-ico"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="con-txt"><strong>Dirección</strong><span>Av. San Martín 100, Las Lomitas · Formosa (CP 3630)</span></div>
+        </div>
+        <div class="con-dato">
+          <div class="con-ico"><i class="fa-solid fa-phone"></i></div>
+          <div class="con-txt"><strong>Teléfono</strong><span>(03718) 42-XXXX</span></div>
+        </div>
+        <div class="con-dato">
+          <div class="con-ico"><i class="fa-solid fa-envelope"></i></div>
+          <div class="con-txt"><strong>Email</strong><span>municipio@laslomitas.gob.ar</span></div>
+        </div>
+        <div class="con-dato">
+          <div class="con-ico"><i class="fa-solid fa-clock"></i></div>
+          <div class="con-txt"><strong>Horario de atención</strong><span>Lunes a viernes · 7:30 – 13:30 hs</span></div>
+        </div>
+        <div class="redes-wrap">
+          <h4>Seguinos en redes</h4>
+          <div class="redes">
+            <a href="#" class="red" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="red" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="red" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="red" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="red" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card reveal d1">
+        <h3>Envianos tu consulta</h3>
+        <form id="frm" novalidate>
+          <div class="form-row">
+            <div class="fg"><label>Nombre y apellido *</label><input type="text" placeholder="Juan García" required></div>
+            <div class="fg"><label>DNI</label><input type="text" placeholder="12.345.678"></div>
+          </div>
+          <div class="form-row">
+            <div class="fg"><label>Email *</label><input type="email" placeholder="juan@email.com" required></div>
+            <div class="fg"><label>Teléfono</label><input type="tel" placeholder="(03718) 4X-XXXX"></div>
+          </div>
+          <div class="fg">
+            <label>Tema *</label>
+            <select required>
+              <option value="">Seleccioná una opción...</option>
+              <option>Trámites y habilitaciones</option>
+              <option>Reclamos de servicios</option>
+              <option>Obras públicas</option>
+              <option>Turismo y eventos</option>
+              <option>Transparencia y documentos</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="fg"><label>Mensaje *</label><textarea placeholder="Describí tu consulta o reclamo..." required></textarea></div>
+          <button type="submit" class="btn btn-azul" style="width:100%;justify-content:center;padding:.9rem;">
+            <i class="fa-solid fa-paper-plane"></i> Enviar consulta
+          </button>
+        </form>
+        <div class="form-ok" id="form-ok">
+          <i class="fa-solid fa-circle-check"></i>
+          <h3 style="font-size:1.2rem;color:var(--verde);margin-bottom:.5rem;">¡Mensaje recibido!</h3>
+          <p style="color:var(--gris-m);">Gracias por comunicarte. Responderemos en 48 horas hábiles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
      FOOTER
-================================================ -->
+===================================================== -->
 <footer id="footer">
-  <div class="ft-inner">
-
-    <div class="ft-marca">
-      <div class="logo-escudo"><i class="fa-solid fa-landmark"></i></div>
-      <h3>Municipalidad de Las Lomitas</h3>
-      <p>Comprometidos con el desarrollo, el bienestar y el orgullo de todos los vecinos del departamento Patiño, provincia de Formosa.</p>
-      <div class="redes">
-        <a href="#" class="red" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" class="red" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="red" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="#" class="red" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="#" class="red" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo-mark" style="width:42px;height:42px;font-size:1rem;border-radius:8px;"><i class="fa-solid fa-landmark"></i></div>
+        <h3>Municipalidad de Las Lomitas</h3>
+        <p>Comprometidos con el desarrollo, la transparencia y el bienestar de todos los vecinos del Departamento Patiño, Formosa.</p>
+        <div class="redes">
+          <a href="#" class="red" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="red" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="red" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="red" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="red" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Municipio</h4>
+        <ul class="ft-links">
+          <li><a href="#gobierno">Gobierno</a></li>
+          <li><a href="#">Concejo Deliberante</a></li>
+          <li><a href="#">Historia de Las Lomitas</a></li>
+          <li><a href="#">Presupuesto participativo</a></li>
+          <li><a href="#">Transparencia</a></li>
+          <li><a href="#">Licitaciones</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Servicios</h4>
+        <ul class="ft-links">
+          <li><a href="#">Trámites online</a></li>
+          <li><a href="#">Reclamos y denuncias</a></li>
+          <li><a href="#">Sacar turno</a></li>
+          <li><a href="#">Habilitaciones comerciales</a></li>
+          <li><a href="#">Tasa municipal</a></li>
+          <li><a href="#">Empleo público</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contacto</h4>
+        <ul class="ft-links">
+          <li><a href="#">Av. San Martín 100, Las Lomitas</a></li>
+          <li><a href="#">Formosa (CP 3630)</a></li>
+          <li><a href="#">(03718) 42-XXXX</a></li>
+          <li><a href="#">municipio@laslomitas.gob.ar</a></li>
+          <li><a href="#">Lun–Vie: 7:30 – 13:30 hs</a></li>
+          <li><a href="#">Emergencias 24 hs</a></li>
+        </ul>
       </div>
     </div>
-
-    <div class="ft-col">
-      <h4>Municipio</h4>
-      <ul class="ft-links">
-        <li><a href="#gobierno">Gobierno</a></li>
-        <li><a href="#">Concejo Deliberante</a></li>
-        <li><a href="#">Normativa municipal</a></li>
-        <li><a href="#">Presupuesto participativo</a></li>
-        <li><a href="#">Transparencia</a></li>
-        <li><a href="#">Licitaciones</a></li>
-      </ul>
-    </div>
-
-    <div class="ft-col">
-      <h4>Servicios</h4>
-      <ul class="ft-links">
-        <li><a href="#">Trámites online</a></li>
-        <li><a href="#">Reclamos y denuncias</a></li>
-        <li><a href="#">Sacar turno</a></li>
-        <li><a href="#">Habilitaciones</a></li>
-        <li><a href="#">Tasa municipal</a></li>
-        <li><a href="#">Empleo público</a></li>
-      </ul>
-    </div>
-
-    <div class="ft-col">
-      <h4>Horarios y contacto</h4>
-      <div class="ft-horario">
-        <p><strong style="color:rgba(255,255,255,.9);">Atención al público</strong></p>
-        <p>Lunes a viernes</p>
-        <p>7:30 – 13:30 hs</p>
-        <br>
-        <p><strong style="color:rgba(255,255,255,.9);">Emergencias 24 hs</strong></p>
-        <p>(03718) 42-XXXX</p>
-        <br>
-        <p>municipio@laslomitas.gob.ar</p>
+    <div class="ft-bottom">
+      <p>© 2025 Municipalidad de Las Lomitas · Departamento Patiño · Formosa, Argentina</p>
+      <div class="ft-bl">
+        <a href="#">Política de privacidad</a>
+        <a href="#">Accesibilidad</a>
+        <a href="#">Mapa del sitio</a>
       </div>
-    </div>
-
-  </div>
-
-  <div class="ft-bottom">
-    <p>© 2025 Municipalidad de Las Lomitas · Departamento Patiño · Formosa, Argentina</p>
-    <div class="ft-blinks">
-      <a href="#">Política de privacidad</a>
-      <a href="#">Accesibilidad</a>
-      <a href="#">Mapa del sitio</a>
     </div>
   </div>
 </footer>
 
-<!-- ================================================
+<!-- =====================================================
      JAVASCRIPT
-================================================ -->
+     1. WebGL Shader Hero (ported from animated-shader-hero.tsx)
+     2. Header scroll
+     3. Mobile menu
+     4. Scroll reveal
+     5. Contact form
+     6. Smooth anchor scroll
+===================================================== -->
 <script>
-  /* ── Header scroll ── */
-  const hd = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    hd.classList.toggle('scrolled', window.scrollY > 60);
-  });
+/* ────────────────────────────────────────────────────
+   1. WEBGL ANIMATED SHADER HERO
+   Ported from animated-shader-hero.tsx (React → Vanilla JS)
+   Original shader by Matthias Hurrle (@atzedent)
+   Modified color palette for institutional blue/teal/green
+──────────────────────────────────────────────────── */
+(function initShader() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
 
-  /* ── Menú hamburguesa ── */
-  const hbg    = document.getElementById('hbg');
-  const navMob = document.getElementById('nav-mob');
+  const gl = canvas.getContext('webgl2');
+  if (!gl) { console.warn('WebGL2 not supported'); return; }
 
-  hbg.addEventListener('click', () => {
-    const on = navMob.classList.toggle('on');
-    hbg.classList.toggle('on', on);
-    document.body.style.overflow = on ? 'hidden' : '';
-  });
+  /* Vertex shader */
+  const VERT = `#version 300 es
+precision highp float;
+in vec4 position;
+void main(){ gl_Position = position; }`;
 
-  function closeMenu() {
-    navMob.classList.remove('on');
-    hbg.classList.remove('on');
-    document.body.style.overflow = '';
+  /* Fragment shader — modified teal/blue/green palette */
+  const FRAG = `#version 300 es
+precision highp float;
+out vec4 O;
+uniform vec2 resolution;
+uniform float time;
+uniform vec2 touch;
+#define FC gl_FragCoord.xy
+#define T time
+#define R resolution
+#define MN min(R.x,R.y)
+
+float rnd(vec2 p){
+  p=fract(p*vec2(12.9898,78.233));
+  p+=dot(p,p+34.56);
+  return fract(p.x*p.y);
+}
+float noise(in vec2 p){
+  vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);
+  float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);
+  return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
+}
+float fbm(vec2 p){
+  float t=.0,a=1.; mat2 m=mat2(1.,-.5,.2,1.2);
+  for(int i=0;i<5;i++){t+=a*noise(p);p*=2.*m;a*=.5;}
+  return t;
+}
+float clouds(vec2 p){
+  float d=1.,t=.0;
+  for(float i=.0;i<3.;i++){
+    float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);
+    t=mix(t,d,a);d=a;p*=2./(i+1.);
+  }
+  return t;
+}
+void main(void){
+  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
+  vec3 col=vec3(0);
+  float bg=clouds(vec2(st.x+T*.5,-st.y));
+  uv*=1.-.3*(sin(T*.2)*.5+.5);
+  for(float i=1.;i<12.;i++){
+    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);
+    vec2 p=uv;
+    float d=length(p);
+    /* Teal/Blue/Green palette — institutional + Bañado */
+    col+=.00125/d*(cos(sin(i)*vec3(3.0,1.8,0.6))+1.);
+    float b=noise(i+p+bg*1.731);
+    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
+    col=mix(col,vec3(bg*.04,bg*.14,bg*.30),d);
+  }
+  O=vec4(col,1);
+}`;
+
+  /* Compile helper */
+  function compile(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+      console.error('Shader error:', gl.getShaderInfoLog(s));
+    return s;
   }
 
-  /* ── Scroll reveal (Intersection Observer) ── */
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('vis');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER,   VERT));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+  gl.linkProgram(prog);
 
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,1,-1,-1,1,1,1,-1]), gl.STATIC_DRAW);
 
-  /* ── Formulario de contacto ── */
-  const form   = document.getElementById('form-con');
-  const formOk = document.getElementById('form-ok');
+  const pos  = gl.getAttribLocation(prog, 'position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
 
-  form.addEventListener('submit', e => {
+  const uRes   = gl.getUniformLocation(prog, 'resolution');
+  const uTime  = gl.getUniformLocation(prog, 'time');
+  const uTouch = gl.getUniformLocation(prog, 'touch');
+
+  let touch = [0, 0];
+  canvas.addEventListener('mousemove', e => {
+    touch = [e.clientX * dpr, canvas.height - e.clientY * dpr];
+  }, { passive:true });
+
+  let dpr = 1;
+
+  function resize() {
+    dpr = Math.max(1, 0.5 * devicePixelRatio);
+    canvas.width  = innerWidth  * dpr;
+    canvas.height = innerHeight * dpr;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive:true });
+
+  function loop(now) {
+    gl.clearColor(0, 0, 0, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.uniform2f(uRes,   canvas.width, canvas.height);
+    gl.uniform1f(uTime,  now * 0.001);
+    gl.uniform2f(uTouch, touch[0], touch[1]);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* ────────────────────────────────────────────────────
+   2. HEADER SCROLL
+──────────────────────────────────────────────────── */
+const hdr = document.getElementById('header');
+window.addEventListener('scroll', () =>
+  hdr.classList.toggle('scrolled', scrollY > 60), { passive:true });
+
+/* ────────────────────────────────────────────────────
+   3. MOBILE MENU
+──────────────────────────────────────────────────── */
+const hbg  = document.getElementById('hbg');
+const mnav = document.getElementById('mob-nav');
+hbg.addEventListener('click', () => {
+  const on = mnav.classList.toggle('on');
+  hbg.classList.toggle('on', on);
+  document.body.style.overflow = on ? 'hidden' : '';
+});
+function cm() {
+  mnav.classList.remove('on');
+  hbg.classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+/* ────────────────────────────────────────────────────
+   4. SCROLL REVEAL
+──────────────────────────────────────────────────── */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); revObs.unobserve(e.target); }
+  });
+}, { threshold:.1, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+/* ────────────────────────────────────────────────────
+   5. CONTACT FORM
+──────────────────────────────────────────────────── */
+const frm   = document.getElementById('frm');
+const frmOk = document.getElementById('form-ok');
+frm.addEventListener('submit', e => {
+  e.preventDefault();
+  let ok = true;
+  frm.querySelectorAll('[required]').forEach(f => {
+    if (!f.value.trim()) {
+      ok = false;
+      f.style.borderColor = '#DC2626';
+      setTimeout(() => f.style.borderColor = '', 3000);
+    }
+  });
+  if (!ok) return;
+  const btn = frm.querySelector('button[type=submit]');
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+  btn.disabled = true;
+  setTimeout(() => { frm.style.display = 'none'; frmOk.style.display = 'block'; }, 1500);
+});
+
+/* ────────────────────────────────────────────────────
+   6. SMOOTH ANCHOR SCROLL
+──────────────────────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
+    if (!target) return;
     e.preventDefault();
-    let valid = true;
-
-    form.querySelectorAll('[required]').forEach(f => {
-      if (!f.value.trim()) {
-        valid = false;
-        f.style.borderColor = '#e05252';
-        setTimeout(() => f.style.borderColor = '', 3000);
-      }
-    });
-
-    if (!valid) return;
-
-    const btn = form.querySelector('button[type="submit"]');
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
-    btn.disabled = true;
-
-    setTimeout(() => {
-      form.style.display = 'none';
-      formOk.style.display = 'block';
-    }, 1400);
-  });
-
-  /* ── Scroll suave para anclas internas ── */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      if (id === '#') return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      e.preventDefault();
-      window.scrollTo({
-        top: target.getBoundingClientRect().top + window.scrollY - 78,
-        behavior: 'smooth'
-      });
+    window.scrollTo({
+      top: target.getBoundingClientRect().top + scrollY - 72,
+      behavior: 'smooth'
     });
   });
+});
 </script>
 </body>
 </html>
